@@ -1,6 +1,5 @@
 * Features
 ** TODO Include a usage manual
 * Bugs
-** TODO Automatically detect branch
-Forgecast currently hardcodes the branch to "main", we should use the
-vc library to address this.
+** DONE Add a live example
+** DONE Automatically detect branch

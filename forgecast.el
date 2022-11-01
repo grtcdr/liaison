@@ -34,6 +34,9 @@
     :sourcehut "git.sr.ht")
   "A property list mapping forges to their respective domains.")
 
+(defun forgecast--get-current-branch ()
+  (car (vc-git-branches)))
+
 (defun forgecast-get-resource-slug ()
   "Determines the slug of the current buffer.
 
@@ -80,7 +83,7 @@ name of your repository, e.g. \"octopus/website\".
 TYPE can take a value of ’log’, ’tree’ or ’blob’.
 
 RESOURCE is a filename relative to the root of the project."
-  (let ((branch "main"))
+  (let ((branch (forgecast--get-current-branch)))
     (cond ((equal forge :github)
 	   (forgecast--build-github-resource-url slug branch type))
 	  ((equal forge :sourcehut)
@@ -88,3 +91,4 @@ RESOURCE is a filename relative to the root of the project."
 	  (t (error "Could not find forge from known list of forges.")))))
 
 (provide 'forgecast)
+;; forgecast.el ends here
