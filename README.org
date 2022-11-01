@@ -28,20 +28,20 @@ See the provided [[https://github.com/grtcdr/forgecast/tree/example][example]] f
 
 * Installation
 
-- Find and navigate to a project you wish to extend with Forgecast's
-  capabilities.
+Find and navigate to a project you wish to extend with Forgecast's
+capabilities.
 
-- Now, clone the project:
+Now, clone the project:
 
-  #+begin_src sh
-  git clone https://github.com/grtcdr/forgecast.git
-  #+end_src
+#+begin_src sh
+git clone https://github.com/grtcdr/forgecast.git
+#+end_src
 
-- Or add it as a submodule:
+Likewise, you may choose to add it as a submodule:
 
-  #+begin_src sh
-  git submodule add https://github.com/grtcdr/forgecast.git
-  #+end_src
+#+begin_src sh
+git submodule add https://github.com/grtcdr/forgecast.git
+#+end_src
 
 * Supported forges
 
