@@ -33,13 +33,13 @@ See the provided [[https://github.com/grtcdr/forgecast/tree/example][example]] f
 
 - Now, clone the project:
 
-  #+begin_example
+  #+begin_src sh
   git clone https://github.com/grtcdr/forgecast.git
-  #+end_example
+  #+end_src
 
 - Or add it as a submodule:
 
-  #+begin_src
+  #+begin_src sh
   git submodule add https://github.com/grtcdr/forgecast.git
   #+end_src
 
