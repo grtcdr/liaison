@@ -15,7 +15,10 @@ may help you address transparency by *automatically* linking your blog
 posts to their original source for you, as well as other types of
 content like the resource's changelog or its raw format.
 
-The only requirement is that your blog's source code must be public.
+The only requirement is that your blog's source code must be
+public.
+
+Forgecast currently supports /GitHub/ and /SourceHut/.
 
 * Usage
 
@@ -42,10 +45,3 @@ Likewise, you may choose to add it as a submodule:
 #+begin_src sh
 git submodule add https://github.com/grtcdr/forgecast.git
 #+end_src
-
-* Supported forges
-
-| Forge     | Tree | Log | Blob |
-|-----------+------+-----+------|
-| GitHub    | ✓    | ✓   | ✓    |
-| SourceHut | ✓    | ✓   | ✓    |
