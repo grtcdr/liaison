@@ -11,23 +11,11 @@ as a tool to "cast resources to their forges".
 
 If you have built a blog on top of the Org Mode ecosystem of
 libraries, for example [[https://orgmode.org/manual/Project-alist.html][org-publish-project-alist]], then this package
-may help you address transparency by linking your blog posts to their
-original source, as well as a detailed list of revisions that have
-affected their content.
+may help you address transparency by *automatically* linking your blog
+posts to their original source for you, as well as other types of
+content like the resource's changelog or its raw format.
 
 The only requirement is that your blog's source code must be public.
-
-For more information, see my publication on [[https://grtcdr.tn/posts/2022-10-08]["Linking articles to their
-version control system to effectively track changes"]].
-
-* Installation
-
-Find a project you wish to extend with Forgecast's capabilities and
-clone the project inside of it.
-
-#+begin_example
-git clone https://github.com/grtcdr/forgecast.git
-#+end_example
 
 * Usage
 
@@ -37,6 +25,23 @@ website/project specification.
 
 See the provided [[https://github.com/grtcdr/forgecast/tree/example][example]] for a minimal working example and then visit
 [[https://grtcdr.tn/forgecast][the published website]] for a live demonstration.
+
+* Installation
+
+- Find and navigate to a project you wish to extend with Forgecast's
+  capabilities.
+
+- Now, clone the project:
+
+  #+begin_example
+  git clone https://github.com/grtcdr/forgecast.git
+  #+end_example
+
+- Or add it as a submodule:
+
+  #+begin_src
+  git submodule add https://github.com/grtcdr/forgecast.git
+  #+end_src
 
 * Supported forges
 
