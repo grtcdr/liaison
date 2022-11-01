@@ -10,7 +10,7 @@ as a tool to "cast resources to their forges".
 /Who is it for?/
 
 If you have built a blog on top of the Org Mode ecosystem of
-libraries, for example [[info:org#Project alist][org-publish-project-alist]], then this package
+libraries, for example [[https://orgmode.org/manual/Project-alist.html][org-publish-project-alist]], then this package
 may help you address transparency by linking your blog posts to their
 original source, as well as a detailed list of revisions that have
 affected their content. 
@@ -22,7 +22,7 @@ version control system to effectively track changes"]].
 
 * Usage
 
-Forgecast is an extension of [[info:org#Publishing][Org Mode's publishing feature]], and should
+Forgecast is an extension of [[https://orgmode.org/manual/Publishing.html][Org Mode's publishing feature]], and should
 therefore be called from a publishing script, i.e. your
 website/project specification.
 
