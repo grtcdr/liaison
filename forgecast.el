@@ -48,15 +48,24 @@ returned by ’forgecast-get-resource-url'."
      (expand-file-name root) buffer)))
 
 (defun forgecast--build-github-resource-url (slug type)
-  (let ((forge (cond ((eq type 'blob) (plist-get forgecast-forge-plist :rawgithub))
-		     (t (plist-get forgecast-forge-plist :github))))
-	(branch (forgecast--get-current-branch))
-	(type (cond ((eq type 'log) "commits")
-		    ((eq type 'tree) "blob")
-		    ((eq type 'blob) "")
-		    (t (error "Type is invalid or does not apply to this backend."))))
-	(resource (forgecast--get-resource-slug)))
-    (mapconcat 'identity (remove "" (list "https://" forge slug type branch resource)) "/")))
+  (let* ((forge (if (eq type 'blob)
+		    (plist-get forgecast-forge-plist :rawgithub)
+		  (plist-get forgecast-forge-plist :github)))
+	 (branch (forgecast--get-current-branch))
+	 (plain-query-string (unless (not (eq type 'plain)) "?plain=1"))
+	 (type (cond ((eq type 'log) "commits")
+		     ((eq type 'edit) "edit")
+		     ((eq type 'blob) "")
+		     ((eq type 'plain) "blob")
+		     ((or (eq type 'tree) (eq type 'plain)) "blob")
+		     (t (error "Type is invalid or does not apply to this backend."))))
+	 (resource (forgecast--get-resource-slug)))
+    (concat
+     "https://"
+     (mapconcat 'identity
+		(remove "" (list forge slug type branch resource))
+		"/")
+     plain-query-string)))
 
 (defun forgecast--build-sourcehut-resource-url (slug type)
   (format-spec
