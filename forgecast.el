@@ -32,7 +32,7 @@
   '(:github "github.com"
     :rawgithub "raw.githubusercontent.com"
     :sourcehut "git.sr.ht")
-  "A property list mapping forges to their respective domains.")
+  "Property list of git forges and their corresponding domain.")
 
 (defun forgecast--get-current-branch ()
   (car (vc-git-branches)))
@@ -60,12 +60,9 @@ returned by ’forgecast-get-resource-url'."
 		     ((or (eq type 'tree) (eq type 'plain)) "blob")
 		     (t (error "Type is invalid or does not apply to this backend."))))
 	 (resource (forgecast--get-resource-slug)))
-    (concat
-     "https://"
-     (mapconcat 'identity
-		(remove "" (list forge slug type branch resource))
-		"/")
-     plain-query-string)))
+    (concat "https://"
+	    (mapconcat 'identity (remove "" (list forge slug type branch resource)) "/")
+	    plain-query-string)))
 
 (defun forgecast--build-sourcehut-resource-url (slug type)
   (format-spec
