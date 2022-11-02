@@ -1,4 +1,7 @@
 * Features
+** Add more functionalities [/] :github:
+*** TODO Generate a URL of the "edit" page of a document
+*** TODO Generate a URL of the "plain" page of a document
 * Documentation
 ** TODO Write up a Texinfo manual
 ** DONE Include a usage example
