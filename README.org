@@ -5,15 +5,19 @@
 Forgecast provides a set of helper functions that allow linking files
 to their corresponding resource at a remote repository. Forgecast is
 an amalgamation of the words "forge" and "cast"; it should be thought
-of as a tool to "cast files to their forges".
+of as a tool to "cast documents to their forges".
+
+Here's a quick demo:
+
+[[file:assets/demo.gif]]
 
 /Who is it for?/
 
 If you have built a blog on top of the Org Mode ecosystem of
 libraries, for example [[https://orgmode.org/manual/Project-alist.html][org-publish-project-alist]], then this package
-may help you address transparency by *automatically* linking your blog
-posts to their original source for you, as well as other types of
-content like the resource's changelog or its raw format.
+may help you address transparency by /automatically/ linking your blog
+posts to their original source for you, as well as other kinds of
+information like their revision history.
 
 The only requirement is that your blog's source code must be
 public.
