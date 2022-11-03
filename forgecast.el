@@ -28,7 +28,7 @@
 (require 'project)
 (require 'vc)
 
-(defvar forgecast-forge-plist
+(defvar forgecast--forge-plist
   '(:github "github.com"
     :rawgithub "raw.githubusercontent.com"
     :sourcehut "git.sr.ht")
@@ -84,14 +84,16 @@ returned by ’forgecast-get-resource-url'."
   "Construct the standard URL of a given FORGE by specifying
 the repository SLUG and the TYPE of information to access.
 
-FORGE is a property from the ’forges’ variable.
+FORGE is a property from the ’forgecast--forge-plist’ variable.
 
 SLUG is a string and the combination of your username and the
 name of your repository, e.g. \"octopus/website\".
 
-TYPE can take a value of ’log’, ’tree’ or ’blob’.
+If FORGE is set to :github then TYPE can take a value ’log’, ’tree’,
+’blob’, ’blame’ or ’plain’.
 
-RESOURCE is a filename relative to the root of the project."
+If FORGE is set to :sourcehut then TYPE can take a value ’log’, ’tree’,
+’blob’ ’blame’."
   (let ((branch (forgecast--get-current-branch)))
     (cond ((equal forge :github)
 	   (forgecast--build-github-resource-url slug type))
