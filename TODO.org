@@ -1,10 +1,10 @@
 * Features
-** Add more functionalities [2/2]                                   :github:
-*** TODO Generate a URL of the "blame" page of a document
+** Add more functionalities [3/3]                                   :github:
+*** DONE Generate a URL of the "blame" page of a document
 *** DONE Generate a URL of the "edit" page of a document
 *** DONE Generate a URL of the "plain" page of a document
-* Add more functionalities [/]                                    :sourcehut:
-*** TODO Generate a URL for the "blame" page of a document
+* Add more functionalities [1/1]                                  :sourcehut:
+*** DONE Generate a URL for the "blame" page of a document
 * Documentation
 ** TODO Write up a Texinfo manual
 ** DONE Include a usage example
