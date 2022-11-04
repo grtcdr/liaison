@@ -30,7 +30,6 @@
 
 (defvar forgecast--forge-plist
   '(:github "github.com"
-    :rawgithub "raw.githubusercontent.com"
     :sourcehut "git.sr.ht")
   "Property list of git forges and their corresponding domain.")
 
@@ -49,7 +48,7 @@ returned by ’forgecast-get-resource-url'."
 
 (defun forgecast--build-github-resource-url (slug type)
   (let* ((forge (if (eq type 'blob)
-		    (plist-get forgecast-forge-plist :rawgithub)
+		    "raw.githubusercontent.com"
 		  (plist-get forgecast-forge-plist :github)))
 	 (branch (forgecast--get-current-branch))
 	 (plain-query-string (unless (not (eq type 'plain)) "?plain=1"))
@@ -89,8 +88,8 @@ FORGE is a property from the ’forgecast--forge-plist’ variable.
 SLUG is a string and the combination of your username and the
 name of your repository, e.g. \"octopus/website\".
 
-If FORGE is set to :github then TYPE can take a value ’log’, ’tree’,
-’blob’, ’blame’ or ’plain’.
+If FORGE is set to :github then TYPE can take a value ’log’,
+’tree’, blob’, ’blame’ or ’plain’.
 
 If FORGE is set to :sourcehut then TYPE can take a value ’log’, ’tree’,
 ’blob’ ’blame’."
