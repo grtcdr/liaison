@@ -1,4 +1,17 @@
+#+TITLE: To-dos
+
+Items tagged with =:sug:= are suggestions received from people from
+somewhere external to this repository. A tag which follows the =:sug:=
+tag is the username of the person with the original suggestion.
+
 * Features
+** Support more forges [0/3]                                  :sug:yantar92:
+*** TODO Savannah
+*** TODO GitLab
+*** TODO Codeberg
+** Inline commit history macro [0/2]                          :sug:yantar92:
+*** TODO Retrieve commit history of a file                   
+*** TODO Implement the macro
 ** Add more functionalities [3/3]                                   :github:
 *** DONE Generate a URL of the "blame" page of a document
 *** DONE Generate a URL of the "edit" page of a document
@@ -7,8 +20,7 @@
 *** DONE Generate a URL for the "blame" page of a document
 * Documentation
 ** TODO Write up a Texinfo manual
-** DONE Include a usage example
+** DONE Include a minimal reproducible example
 ** DONE Include a video demonstration of real-world example
 * Bugs
-** DONE Add a live example
 ** DONE Automatically detect branch
