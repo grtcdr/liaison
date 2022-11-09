@@ -37,7 +37,7 @@
 build their resource URLs")
 
 (defun forgecast--forge-function (forge)
-  (alist-get forge forgecast-forge-plist nil nil #'string-equal))
+  (alist-get forge forgecast-forge-plist nil nil #'string=))
 
 (defun forgecast--git-remote-to-https (remote)
   (string-replace
@@ -128,8 +128,7 @@ Gitea or a Gitea-based repository. TYPE can be one of ’log’,
 (defun forgecast--build-github-resource-url (remote type)
       "This function returns the URL representing a resource hosted on
 GitHub. TYPE can be one of ’log’, ’edit’, ’blob’, ’plain’,
-’blame’ or ’tree’.
-"
+’blame’ or ’tree’."
   (let* ((forge (if (eq type 'blob)
 		    "https://raw.githubusercontent.com"
 		  (concat "https://" (forgecast--assoc-forge remote))))
@@ -138,7 +137,7 @@ GitHub. TYPE can be one of ’log’, ’edit’, ’blob’, ’plain’,
 	 (slug (if (string-prefix-p "git@" remote)
 		   (string-trim (cadr (split-string remote ":")) nil ".git")
 		 (string-trim remote
-			      (concat (forgecast--assoc-forge 'github) "/")
+			      (concat forge "/")
 			      ".git")))
 	 (plain-query-string (unless (not (eq type 'plain))
 			       "?plain=1"))
@@ -155,24 +154,20 @@ GitHub. TYPE can be one of ’log’, ’edit’, ’blob’, ’plain’,
   "This function returns the URL representing a resource hosted on
 SourceHut or a SourceHut-based forge. TYPE can be any one of
 ’log’, ’tree’, ’blob’ or ’blame’."
-  (format-spec
-   "%d/%s/%t/%b/%x/%r"
-   `((?d . ,(concat "https://" (forgecast--assoc-forge remote)))
-     (?s . ,(if (string-prefix-p "git@" remote)
-		(cadr (split-string remote ":"))
-	      (string-trim remote
-			   (concat (if forge (forgecast--forge-base forge)
-			   (forgecast--forge-base 'sourcehut))
-				   "/"))))
-     (?t . ,(cond ((eq type 'log) "log")
-		  ((eq type 'tree) "tree")
-		  ((eq type 'blob) "blob")
-		  ((eq type 'blame) "blame")
-		  (t (error "Type is invalid or does not apply to this forge."))))
-     (?b . ,(forgecast--get-current-branch))
-     (?x . ,(cond ((eq type 'blob) "")
-		  (t "item")))
-     (?r . ,(forgecast--get-resource-slug)))))
+  (let* ((forge (concat "https://" (forgecast--assoc-forge remote)))
+	 (slug (if (string-prefix-p "git@" remote)
+		    (cadr (split-string remote ":"))
+		  (string-trim remote forge)))
+	 (type (cond ((eq type 'log) "log")
+		      ((eq type 'tree) "tree")
+		      ((eq type 'blob) "blob")
+		      ((eq type 'blame) "blame")
+		      (t (error "Type is invalid or does not apply to this forge."))))
+	 (branch (forgecast--get-current-branch))
+	 (suffix (cond ((eq type 'blob) "")
+		       (t "item")))
+	 (resource (forgecast--get-resource-slug)))
+    (mapconcat 'identity (remove "" (list forge slug type branch suffix resource)) "/")))
 
 (provide 'forgecast)
 ;; forgecast.el ends here

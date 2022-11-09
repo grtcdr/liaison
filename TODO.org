@@ -1,8 +1,8 @@
 #+TITLE: To-dos
 
 Items tagged with =:sug:= are suggestions received from people from
-somewhere external to this repository. A tag which follows the =:sug:=
-tag is the username of the person with the original suggestion.
+somewhere external to this repository. A tag immediatelly following
+=:sug:= is the username of the person with the original suggestion.
 
 * Features
 ** DONE Function reusability by inferring all relevant information
