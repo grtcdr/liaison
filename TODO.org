@@ -5,10 +5,11 @@ somewhere external to this repository. A tag which follows the =:sug:=
 tag is the username of the person with the original suggestion.
 
 * Features
-** Support more forges [0/3]                                  :sug:yantar92:
-*** TODO Savannah
+** DONE Function reusability by inferring all relevant information
+** Support more forges [2/3]                                  :sug:yantar92:
+*** DONE Savannah
+*** DONE Codeberg
 *** TODO GitLab
-*** TODO Codeberg
 ** Inline commit history macro [0/2]                          :sug:yantar92:
 *** TODO Retrieve commit history of a file                   
 *** TODO Implement the macro
