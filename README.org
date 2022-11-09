@@ -15,14 +15,15 @@ Here's a quick demo:
 
 If you have built a blog on top of the Org Mode ecosystem of
 libraries, for example [[https://orgmode.org/manual/Project-alist.html][org-publish-project-alist]], then this package
-may help you address transparency by /automatically/ linking your blog
-posts to their original source for you, as well as other kinds of
-information like their revision history.
+may help you address transparency and improve accessibility by
+/automatically/ linking your blog posts to their original source for
+you, as well as other kinds of information such as revision history.
 
-The only requirement is that your blog's source code must be
-public.
-
-Forgecast currently supports /GitHub/ and /SourceHut/.
+Forgecast currently supports:
+- GitHub
+- SourceHut and derivative deployments
+- Gitea and derivative deployments
+- cgit deployments
 
 * Usage
 
