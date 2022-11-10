@@ -32,7 +32,8 @@
   '(("github.com" . #'forgecast--build-github-resource-url)
     ("git.sr.ht" . #'forgecast--build-sourcehut-resource-url)
     ("git.savannah.gnu.org/cgit" . #'forgecast--build-cgit-resource-url)
-    ("codeberg.org" . #'forgecast--build-gitea-resource-url))
+    ("codeberg.org" . #'forgecast--build-gitea-resource-url)
+    ("gitlab.com" . #'forgecast--build-gitlab-resource-url))
   "Alist of forges and their corresponding function which is used to
 build their resource URLs")
 
@@ -108,7 +109,7 @@ TYPE can be one of ’log’, ’tree’ or ’blob’.
 Gitea or a Gitea-based repository. TYPE can be one of ’log’,
 ’tree', ’blob’, or ’blame’.
 "
-  (unless (not (member type '(log tree blob)))
+  (unless (not (member type '(log tree blob blame)))
     (format-spec
      "%d/%s/%t/branch/%b/%r"
      `((?d . ,(concat "https://" (forgecast--assoc-forge remote)))
@@ -149,9 +150,32 @@ GitHub. TYPE can be one of ’log’, ’edit’, ’blob’, ’plain’,
 		       ((eq type 'blob) "")
 		       ((eq type 'plain) "blob")
 		       ((eq type 'blame) "blame")
-		       ((or (eq type 'tree) (eq type 'plain)) "blob")
-		       (t (error "Type is invalid or does not apply to this forge.")))))
+		       ((or (eq type 'tree) (eq type 'plain)) "blob"))))
       (mapconcat 'identity (remove "" (list forge slug type branch resource plain-query-string)) "/"))))
+
+(defun forgecast--build-gitlab-resource-url (remote type)
+    "This function returns the URL representing a resource hosted on
+GitLab or a GitLab-based forge. TYPE can be any one of
+’log’, ’tree’, ’blob’ or ’blame’ or ’plain’."
+  (unless (not (member type '(log tree blob blame plain)))
+    (let* ((?d (concat "https://" (forgecast--assoc-forge remote)))
+	   (?s (if (string-prefix-p "git@" remote)
+		   (string-trim (car (cdr (split-string remote ":"))) nil ".git")
+		 (string-trim remote
+			      (concat (if forge (forgecast--forge-base 'gitea)
+					(forgecast--forge-base forge))
+				      "/")
+			      ".git")))
+	   (?t (cond ((eq type 'log) "commits")
+		     ((eq type 'tree) "blob")
+		     ((eq type 'blob) "raw")
+		     ((eq type 'blame) "blame")
+		     ((eq type 'plain) "blob")))
+	   (plain-query-string (unless (not (eq type 'plain))
+				 "?plain=1"))
+	   (?b (forgecast--get-current-branch))
+	   (?r (forgecast--get-resource-slug)))
+      (mapconcat 'identity (remove "" (list forge slug "-" type branch resource plain-query-string)) "/"))))
 
 (defun forgecast--build-sourcehut-resource-url (remote type)
   "This function returns the URL representing a resource hosted on

@@ -19,8 +19,10 @@ may help you address transparency and improve accessibility by
 /automatically/ linking your blog posts to their original source for
 you, as well as other kinds of information such as revision history.
 
-Forgecast currently supports:
+/What forges does it support?/
+
 - GitHub
+- GitLab and derivative deployments
 - SourceHut and derivative deployments
 - Gitea and derivative deployments
 - cgit deployments

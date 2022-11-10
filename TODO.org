@@ -6,10 +6,10 @@ somewhere external to this repository. A tag immediatelly following
 
 * Features
 ** DONE Function reusability by inferring all relevant information
-** Support more forges [2/3]                                  :sug:yantar92:
+** Support more forges [3/3]                                  :sug:yantar92:
 *** DONE Savannah
 *** DONE Codeberg
-*** TODO GitLab
+*** DONE GitLab
 ** Inline commit history macro [0/2]                          :sug:yantar92:
 *** TODO Retrieve commit history of a file                   
 *** TODO Implement the macro
@@ -17,7 +17,7 @@ somewhere external to this repository. A tag immediatelly following
 *** DONE Generate a URL of the "blame" page of a document
 *** DONE Generate a URL of the "edit" page of a document
 *** DONE Generate a URL of the "plain" page of a document
-* Add more functionalities [1/1]                                  :sourcehut:
+** Add more functionalities [1/1]                                :sourcehut:
 *** DONE Generate a URL for the "blame" page of a document
 * Documentation
 ** TODO Write up a Texinfo manual
