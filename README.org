@@ -22,10 +22,10 @@ you, as well as other kinds of information such as revision history.
 /What forges does it support?/
 
 - GitHub
-- GitLab and derivative deployments
-- SourceHut and derivative deployments
-- Gitea and derivative deployments
-- cgit deployments
+- GitLab and custom instances
+- SourceHut and custom instances
+- Gitea and custom instances
+- cgit instances
 
 * Usage
 
@@ -35,6 +35,24 @@ website/project specification.
 
 See the provided [[https://github.com/grtcdr/forgecast/tree/example][example]] for a minimal working example and then visit
 [[https://grtcdr.tn/forgecast][the published website]] for a live demonstration.
+
+* Custom instances
+
+Forgecast by default doesn't recognize domains beside the presets, so
+you'll have to specify the domain of your forge and its associated
+resource URL builder.
+
+Now, suppose you're a member of [[https://www.freedesktop.org/wiki/][freedesktop.org]], your wonderful
+projects are present in the GitLab instance provided by your
+organization.
+
+To add support for your infrastructure, you need to customize the
+=forgecast-forge-alist= variable, here's an example:
+
+#+begin_src emacs-lisp
+(defvar forgecast-forge-alist
+  '(("gitlab.freedesktop.org" . #'forgecast--build-gitlab-resource-url)))
+#+end_src
 
 * Installation
 
