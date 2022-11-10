@@ -28,7 +28,7 @@
 (require 'project)
 (require 'vc)
 
-(defvar forgecast-forge-plist
+(defvar forgecast-forge-alist
   '(("github.com" . #'forgecast--build-github-resource-url)
     ("git.sr.ht" . #'forgecast--build-sourcehut-resource-url)
     ("git.savannah.gnu.org/cgit" . #'forgecast--build-cgit-resource-url)
@@ -38,7 +38,7 @@
 build their resource URLs")
 
 (defun forgecast--forge-function (forge)
-  (alist-get forge forgecast-forge-plist nil nil #'string=))
+  (alist-get forge forgecast-forge-alist nil nil #'string=))
 
 (defun forgecast--git-remote-to-https (remote)
   (string-replace
@@ -48,7 +48,7 @@ build their resource URLs")
 
 (defun forgecast--assoc-forge (remote)
   (let ((forge nil))
-    (dolist (f forgecast-forge-plist)
+    (dolist (f forgecast-forge-alist)
       (when (string-prefix-p
 	     (concat "https://" (car f))
 	     (cond ((string-prefix-p "git@" remote)
