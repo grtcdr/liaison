@@ -27,6 +27,8 @@ you, as well as other kinds of information such as revision history.
 - Gitea and custom instances
 - cgit instances
 
+See the [[#custom-instances][Custom instances]] section for more information.
+
 * Usage
 
 Forgecast is an extension of [[https://orgmode.org/manual/Publishing.html][Org Mode's publishing feature]] and should
@@ -37,6 +39,9 @@ See the provided [[https://github.com/grtcdr/forgecast/tree/example][example]] f
 [[https://grtcdr.tn/forgecast][the published website]] for a live demonstration.
 
 * Custom instances
+:PROPERTIES:
+:CUSTOM_ID: custom-instances
+:END:
 
 Forgecast by default doesn't recognize domains beside the presets, so
 you'll have to specify the domain of your forge and its associated
@@ -53,6 +58,9 @@ To add support for your infrastructure, you need to customize the
 (defvar forgecast-forge-alist
   '(("gitlab.freedesktop.org" . #'forgecast--build-gitlab-resource-url)))
 #+end_src
+
+You should now be comfortable with the way this library works, enough
+to make it work for whatever forges you're currently using.
 
 * Installation
 
