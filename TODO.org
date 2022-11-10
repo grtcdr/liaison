@@ -5,6 +5,7 @@ somewhere external to this repository. A tag immediatelly following
 =:sug:= is the username of the person with the original suggestion.
 
 * Features
+** DONE Automatically detect branch
 ** DONE Function reusability by inferring all relevant information
 ** Support more forges [3/3]                                  :sug:yantar92:
 *** DONE Savannah
@@ -24,4 +25,4 @@ somewhere external to this repository. A tag immediatelly following
 ** DONE Include a minimal reproducible example
 ** DONE Include a video demonstration of real-world example
 * Bugs
-** DONE Automatically detect branch
+** TODO Example website using incorrect blob resource URL 
