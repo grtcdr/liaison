@@ -7,7 +7,7 @@ to their corresponding resource at a remote repository. Forgecast is
 an amalgamation of the words "forge" and "cast"; it should be thought
 of as a tool to "cast documents to their forges".
 
-Here's a quick demo:
+/How does it work?/
 
 [[file:assets/demo.gif]]
 
