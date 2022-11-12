@@ -60,7 +60,7 @@ build their resource URLs")
 
 (defun forgecast--get-current-branch ()
   (vc-git--symbolic-ref
-   (vc-git--rev-parse "@{push}" t)))
+   (vc-git--rev-parse "@{push}")))
 
 (defun forgecast--get-remote ()
   (vc-git-repository-url (buffer-file-name) nil))
