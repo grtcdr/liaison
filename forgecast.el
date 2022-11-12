@@ -77,15 +77,12 @@ returned by ’forgecast-get-resource-url'."
 
 (defun forgecast-get-resource-url (type)
   "Construct the standard URL of a given FORGE by specifying
-the repository SLUG and the TYPE of information to access.
-
-FORGE is a property from the ’forgecast--forge-plist’ variable.
-
-SLUG is a string and the combination of your username and the
-name of your repository, e.g. \"octopus/website\"."
+the repository SLUG and the TYPE of information to access."
   (let* ((remote (forgecast--get-remote))
 	 (forge (forgecast--assoc-forge remote)))
-    (funcall (eval (forgecast--forge-function forge)) remote type)))
+    (string-trim-right
+     (funcall (eval (forgecast--forge-function forge)) remote type)
+     "/")))
 
 (defun forgecast--build-cgit-resource-url (remote type)
   "This function returns the URL representing a resource hosted on a
@@ -152,6 +149,8 @@ GitHub. TYPE can be one of ’log’, ’edit’, ’blob’, ’plain’,
 		       ((eq type 'blame) "blame")
 		       ((or (eq type 'tree) (eq type 'plain)) "blob"))))
       (mapconcat 'identity (remove "" (list forge slug type branch resource plain-query-string)) "/"))))
+
+(mapconcat 'identity (remove "" '("hello" "" "friend" "")) "/")
 
 (defun forgecast--build-gitlab-resource-url (remote type)
     "This function returns the URL representing a resource hosted on
