@@ -148,7 +148,9 @@ GitHub. TYPE can be one of ’log’, ’edit’, ’blob’, ’plain’,
 		       ((eq type 'plain) "blob")
 		       ((eq type 'blame) "blame")
 		       ((or (eq type 'tree) (eq type 'plain)) "blob"))))
-      (mapconcat 'identity (remove "" (list forge slug type branch resource plain-query-string)) "/"))))
+      (concat 
+       (mapconcat 'identity (remove "" (list forge slug type branch resource)) "/")
+       plain-query-string))))
 
 (mapconcat 'identity (remove "" '("hello" "" "friend" "")) "/")
 
@@ -174,7 +176,9 @@ GitLab or a GitLab-based forge. TYPE can be any one of
 				 "?plain=1"))
 	   (?b (forgecast--get-current-branch))
 	   (?r (forgecast--get-resource-slug)))
-      (mapconcat 'identity (remove "" (list forge slug "-" type branch resource plain-query-string)) "/"))))
+      (concat
+       (mapconcat 'identity (remove "" (list forge slug "-" type branch resource)) "/")
+       plain-query-string))))
 
 (defun forgecast--build-sourcehut-resource-url (remote type)
   "This function returns the URL representing a resource hosted on
