@@ -80,9 +80,7 @@ returned by ’forgecast-get-resource-url'."
 the repository SLUG and the TYPE of information to access."
   (let* ((remote (forgecast--get-remote))
 	 (forge (forgecast--assoc-forge remote)))
-    (string-trim-right
-     (funcall (eval (forgecast--forge-function forge)) remote type)
-     "/")))
+    (funcall (eval (forgecast--forge-function forge)) remote type)))
 
 (defun forgecast--build-cgit-resource-url (remote type)
   "This function returns the URL representing a resource hosted on a
