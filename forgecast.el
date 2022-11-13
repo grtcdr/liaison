@@ -112,9 +112,7 @@ Gitea or a Gitea-based repository. TYPE can be one of ’log’,
        (?s . ,(if (string-prefix-p "git@" remote)
 		  (string-trim (car (cdr (split-string remote ":"))) nil ".git")
 		(string-trim remote
-			     (concat (if forge (forgecast--forge-base 'gitea)
-				       (forgecast--forge-base forge))
-				     "/")
+			     (concat "https://" (forgecast--assoc-forge remote) "/")
 			     ".git")))
        (?t . ,(cond ((eq type 'log) "commits")
 		    ((eq type 'tree) "src")
@@ -136,7 +134,7 @@ GitHub. TYPE can be one of ’log’, ’edit’, ’blob’, ’plain’,
 	   (slug (if (string-prefix-p "git@" remote)
 		     (string-trim (cadr (split-string remote ":")) nil ".git")
 		   (string-trim remote
-				(concat forge "/")
+				(concat "https://" (forgecast--assoc-forge remote) "/")
 				".git")))
 	   (plain-query-string (unless (not (eq type 'plain))
 				 "?plain=1"))
@@ -159,9 +157,7 @@ GitLab or a GitLab-based forge. TYPE can be any one of
 	   (?s (if (string-prefix-p "git@" remote)
 		   (string-trim (car (cdr (split-string remote ":"))) nil ".git")
 		 (string-trim remote
-			      (concat (if forge (forgecast--forge-base 'gitea)
-					(forgecast--forge-base forge))
-				      "/")
+			      (concat "https://" (forgecast--assoc-forge remote) "/")
 			      ".git")))
 	   (?t (cond ((eq type 'log) "commits")
 		     ((eq type 'tree) "blob")
@@ -184,7 +180,8 @@ SourceHut or a SourceHut-based forge. TYPE can be any one of
     (let* ((forge (concat "https://" (forgecast--assoc-forge remote)))
 	   (slug (if (string-prefix-p "git@" remote)
 		     (cadr (split-string remote ":"))
-		   (string-trim remote (concat forge "/"))))
+		   (string-trim remote
+				(concat "https://" (forgecast--assoc-forge remote) "/"))))
 	   (type (cond ((eq type 'log) "log")
 		       ((eq type 'tree) "tree")
 		       ((eq type 'blob) "blob")
