@@ -60,8 +60,9 @@ build their resource URLs")
     forge))
 
 (defun forgecast--get-branch ()
-  (vc-git--symbolic-ref
-   (vc-git--rev-parse "@{push}")))
+  (let ((branch (vc-git--rev-parse "@{push}")))
+    (unless (null branch)
+      (vc-git--symbolic-ref branch))))
 
 (defun forgecast--get-remote ()
   (vc-git-repository-url
