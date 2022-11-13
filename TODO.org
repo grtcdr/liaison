@@ -25,4 +25,4 @@ somewhere external to this repository. A tag immediatelly following
 ** DONE Include a minimal reproducible example
 ** DONE Include a video demonstration of real-world example
 * Bugs
-** TODO Example website using incorrect blob resource URL 
+** DONE Fix example website using incorrect blob resource URL 
