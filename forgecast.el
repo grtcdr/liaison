@@ -96,8 +96,7 @@ TYPE can be one of ’log’, ’tree’ or ’blob’.
      `((?f . ,(concat "https://" (forgecast--assoc-forge remote)))
        (?t . ,(cond ((eq type 'log) "log")
 		    ((eq type 'tree) "src")
-		    ((eq type 'blob) "plain")
-		    (t (error "Type is invalid or does not apply to this forge."))))
+		    ((eq type 'blob) "plain")))
        (?b . ,(forgecast--get-current-branch))
        (?r . ,(forgecast--get-resource-slug))))))
 
@@ -120,8 +119,7 @@ Gitea or a Gitea-based repository. TYPE can be one of ’log’,
        (?t . ,(cond ((eq type 'log) "commits")
 		    ((eq type 'tree) "src")
 		    ((eq type 'blob) "raw")
-		    ((eq type 'blame) "blame")
-		    (t (error "Type is invalid or does not apply to this forge."))))
+		    ((eq type 'blame) "blame")))
        (?b . ,(forgecast--get-current-branch))
        (?r . ,(forgecast--get-resource-slug))))))
 
@@ -151,8 +149,6 @@ GitHub. TYPE can be one of ’log’, ’edit’, ’blob’, ’plain’,
       (concat 
        (mapconcat 'identity (remove "" (list forge slug type branch resource)) "/")
        plain-query-string))))
-
-(mapconcat 'identity (remove "" '("hello" "" "friend" "")) "/")
 
 (defun forgecast--build-gitlab-resource-url (remote type)
     "This function returns the URL representing a resource hosted on
