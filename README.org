@@ -22,9 +22,9 @@ you, as well as other kinds of information such as revision history.
 /What forges does it support?/
 
 - GitHub
-- GitLab and custom instances
-- SourceHut and custom instances
-- Gitea and custom instances
+- GitLab (and custom instances)
+- SourceHut (and custom instances)
+- Gitea (and custom instances)
 - cgit instances
 
 See the [[#custom-instances][Custom instances]] section for more information.
@@ -32,11 +32,27 @@ See the [[#custom-instances][Custom instances]] section for more information.
 * Usage
 
 Forgecast is an extension of [[https://orgmode.org/manual/Publishing.html][Org Mode's publishing feature]] and should
-therefore be called from a publishing script, i.e. your
-website/project specification.
+therefore be called from a publishing script, i.e. your project
+specification.
 
-See the provided [[https://github.com/grtcdr/forgecast/tree/example][example]] for a minimal working example and then visit
-[[https://grtcdr.tn/forgecast][the published website]] for a live demonstration.
+For a minimal working example, check out [[https://github.com/grtcdr/forgecast/tree/example][the example branch]] in addition to [[https://grtcdr.tn/forgecast][the live website]].
+
+* Installation
+
+Find and navigate to a project you wish to extend with Forgecast's
+capabilities.
+
+Now, clone the project:
+
+#+begin_src sh
+git clone https://github.com/grtcdr/forgecast.git
+#+end_src
+
+Likewise, you may choose to add it as a submodule:
+
+#+begin_src sh
+git submodule add https://github.com/grtcdr/forgecast.git
+#+end_src
 
 * Custom instances
 :PROPERTIES:
@@ -62,19 +78,3 @@ To add support for your infrastructure, you need to customize the
 You should now be comfortable with the way this library works, enough
 to make it work for whatever forges you're currently using.
 
-* Installation
-
-Find and navigate to a project you wish to extend with Forgecast's
-capabilities.
-
-Now, clone the project:
-
-#+begin_src sh
-git clone https://github.com/grtcdr/forgecast.git
-#+end_src
-
-Likewise, you may choose to add it as a submodule:
-
-#+begin_src sh
-git submodule add https://github.com/grtcdr/forgecast.git
-#+end_src
