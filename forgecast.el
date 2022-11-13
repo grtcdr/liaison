@@ -58,7 +58,7 @@ build their resource URLs")
 	(setq forge (car f))))
     forge))
 
-(defun forgecast--get-current-branch ()
+(defun forgecast--get-branch ()
   (vc-git--symbolic-ref
    (vc-git--rev-parse "@{push}")))
 
@@ -97,7 +97,7 @@ TYPE can be one of ’log’, ’tree’ or ’blob’.
        (?t . ,(cond ((eq type 'log) "log")
 		    ((eq type 'tree) "src")
 		    ((eq type 'blob) "plain")))
-       (?b . ,(forgecast--get-current-branch))
+       (?b . ,(forgecast--get-branch))
        (?r . ,(forgecast--get-resource-slug))))))
 
 (defun forgecast--build-gitea-resource-url (remote type)
@@ -118,7 +118,7 @@ Gitea or a Gitea-based repository. TYPE can be one of ’log’,
 		    ((eq type 'tree) "src")
 		    ((eq type 'blob) "raw")
 		    ((eq type 'blame) "blame")))
-       (?b . ,(forgecast--get-current-branch))
+       (?b . ,(forgecast--get-branch))
        (?r . ,(forgecast--get-resource-slug))))))
 
 (defun forgecast--build-github-resource-url (remote type)
@@ -129,7 +129,7 @@ GitHub. TYPE can be one of ’log’, ’edit’, ’blob’, ’plain’,
     (let* ((forge (if (eq type 'blob)
 		      "https://raw.githubusercontent.com"
 		    (concat "https://" (forgecast--assoc-forge remote))))
-	   (branch (forgecast--get-current-branch))
+	   (branch (forgecast--get-branch))
 	   (resource (forgecast--get-resource-slug))
 	   (slug (if (string-prefix-p "git@" remote)
 		     (string-trim (cadr (split-string remote ":")) nil ".git")
@@ -166,7 +166,7 @@ GitLab or a GitLab-based forge. TYPE can be any one of
 		     ((eq type 'plain) "blob")))
 	   (plain-query-string (unless (not (eq type 'plain))
 				 "?plain=1"))
-	   (?b (forgecast--get-current-branch))
+	   (?b (forgecast--get-branch))
 	   (?r (forgecast--get-resource-slug)))
       (concat
        (mapconcat 'identity (remove "" (list forge slug "-" type branch resource)) "/")
@@ -186,7 +186,7 @@ SourceHut or a SourceHut-based forge. TYPE can be any one of
 		       ((eq type 'tree) "tree")
 		       ((eq type 'blob) "blob")
 		       ((eq type 'blame) "blame")))
-	   (branch (forgecast--get-current-branch))
+	   (branch (forgecast--get-branch))
 	   (suffix (cond ((eq type 'blob) "")
 			 (t "item")))
 	   (resource (forgecast--get-resource-slug)))
