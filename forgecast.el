@@ -30,10 +30,11 @@
 
 (defvar forgecast-forge-alist
   '(("github.com" . #'forgecast--build-github-resource-url)
+    ("gitlab.com" . #'forgecast--build-gitlab-resource-url)
+    ("codeberg.org" . #'forgecast--build-gitea-resource-url)
     ("git.sr.ht" . #'forgecast--build-sourcehut-resource-url)
     ("git.savannah.gnu.org/cgit" . #'forgecast--build-cgit-resource-url)
-    ("codeberg.org" . #'forgecast--build-gitea-resource-url)
-    ("gitlab.com" . #'forgecast--build-gitlab-resource-url))
+    ("git.savannah.nongnu.org/cgit" . #'forgecast--build-cgit-resource-url))
   "Alist of forges and their corresponding function which is used to
 build their resource URLs")
 
@@ -63,7 +64,8 @@ build their resource URLs")
    (vc-git--rev-parse "@{push}")))
 
 (defun forgecast--get-remote ()
-  (vc-git-repository-url (buffer-file-name) nil))
+  (vc-git-repository-url
+   (buffer-file-name) nil))
 
 (defun forgecast--get-resource-slug ()
   "Determines the slug of the current buffer.
@@ -73,7 +75,8 @@ returned by ’forgecast-get-resource-url'."
   (let* ((buffer (buffer-file-name))
 	 (root (vc-find-root buffer ".git")))
     (string-remove-prefix
-     (expand-file-name root) buffer)))
+     (expand-file-name root)
+     buffer)))
 
 (defun forgecast-get-resource-url (type)
   "Construct the standard URL of a given FORGE by specifying
@@ -178,15 +181,10 @@ SourceHut or a SourceHut-based forge. TYPE can be any one of
     (let* ((forge (concat "https://" (forgecast--assoc-forge remote)))
 	   (slug (if (string-prefix-p "git@" remote)
 		     (cadr (split-string remote ":"))
-		   (string-trim remote
-				(concat "https://" (forgecast--assoc-forge remote) "/"))))
-	   (type (cond ((eq type 'log) "log")
-		       ((eq type 'tree) "tree")
-		       ((eq type 'blob) "blob")
-		       ((eq type 'blame) "blame")))
+		   (string-trim remote (concat "https://" (forgecast--assoc-forge remote) "/"))))
+	   (type (downcase (symbol-name type)))
 	   (branch (forgecast--get-branch))
-	   (suffix (cond ((eq type 'blob) "")
-			 (t "item")))
+	   (suffix (if (eq type 'blob) "" "item"))
 	   (resource (forgecast--get-resource-slug)))
       (mapconcat 'identity (remove "" (list forge slug type branch suffix resource)) "/"))))
 
