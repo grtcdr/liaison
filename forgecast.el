@@ -69,10 +69,7 @@ build their resource URLs")
    (buffer-file-name) nil))
 
 (defun forgecast--get-resource-slug ()
-  "Determines the slug of the current buffer.
-
-The slug is the path of the resource relative to the value
-returned by ’forgecast-get-resource-url'."
+  "Determine the slug of the current buffer."
   (let* ((buffer (buffer-file-name))
 	 (root (vc-find-root buffer ".git")))
     (string-remove-prefix
@@ -80,18 +77,14 @@ returned by ’forgecast-get-resource-url'."
      buffer)))
 
 (defun forgecast-get-resource-url (type)
-  "Construct the standard URL of a given FORGE by specifying
-the repository SLUG and the TYPE of information to access."
+  "Return the URL of the current resource given the TYPE."
   (let* ((remote (forgecast--get-remote))
 	 (forge (forgecast--assoc-forge remote)))
     (funcall (eval (forgecast--forge-function forge)) remote type)))
 
 (defun forgecast--build-cgit-resource-url (remote type)
-  "This function returns the URL representing a resource hosted on a
-cgit-based repository.
-
-TYPE can be one of ’log’, ’tree’ or ’blob’.
-"
+  "Return the URL representing a resource hosted on a cgit
+instance. TYPE can be one of ’log’, ’tree’ or ’blob’."
   (unless (not (member type '(log tree blob)))
     (format-spec
      "%f/%t/branch/%b/%r"
@@ -103,10 +96,9 @@ TYPE can be one of ’log’, ’tree’ or ’blob’.
        (?r . ,(forgecast--get-resource-slug))))))
 
 (defun forgecast--build-gitea-resource-url (remote type)
-  "This function returns the URL representing a resource hosted on
-Gitea or a Gitea-based repository. TYPE can be one of ’log’,
-’tree', ’blob’, or ’blame’.
-"
+  "Return the URL representing a resource hosted on Gitea or a
+custom instance. TYPE can be one of ’log’, ’tree', ’blob’, or
+’blame’."
   (unless (not (member type '(log tree blob blame)))
     (format-spec
      "%d/%s/%t/branch/%b/%r"
@@ -124,7 +116,7 @@ Gitea or a Gitea-based repository. TYPE can be one of ’log’,
        (?r . ,(forgecast--get-resource-slug))))))
 
 (defun forgecast--build-github-resource-url (remote type)
-  "This function returns the URL representing a resource hosted on
+  "Return the URL representing a resource hosted on
 GitHub. TYPE can be one of ’log’, ’edit’, ’blob’, ’plain’,
 ’blame’ or ’tree’."
   (unless (not (member type '(log edit blob blame plain tree)))
@@ -151,9 +143,9 @@ GitHub. TYPE can be one of ’log’, ’edit’, ’blob’, ’plain’,
        plain-query-string))))
 
 (defun forgecast--build-gitlab-resource-url (remote type)
-    "This function returns the URL representing a resource hosted on
-GitLab or a GitLab-based forge. TYPE can be any one of
-’log’, ’tree’, ’blob’ or ’blame’ or ’plain’."
+    "Return the URL representing a resource hosted on GitLab or a
+custom instance. TYPE can be any one of ’log’, ’tree’, ’blob’ or
+’blame’ or ’plain’."
   (unless (not (member type '(log tree blob blame plain)))
     (let* ((?d (concat "https://" (forgecast--assoc-forge remote)))
 	   (?s (if (string-prefix-p "git@" remote)
@@ -175,9 +167,9 @@ GitLab or a GitLab-based forge. TYPE can be any one of
        plain-query-string))))
 
 (defun forgecast--build-sourcehut-resource-url (remote type)
-  "This function returns the URL representing a resource hosted on
-SourceHut or a SourceHut-based forge. TYPE can be any one of
-’log’, ’tree’, ’blob’ or ’blame’."
+  "Return the URL representing a resource hosted on SourceHut or a
+custom instance. TYPE can be any one of ’log’, ’tree’, ’blob’ or
+’blame’."
   (unless (not (member type '(log tree blob blame)))
     (let* ((forge (concat "https://" (forgecast--assoc-forge remote)))
 	   (slug (if (string-prefix-p "git@" remote)
