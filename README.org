@@ -29,18 +29,6 @@ you, as well as other kinds of information such as revision history.
 
 See the [[#custom-instances][Custom instances]] section for more information.
 
-* Usage
-
-Forgecast is an extension of [[https://orgmode.org/manual/Publishing.html][Org Mode's publishing feature]] and should
-therefore be called from a publishing script, i.e. your project
-specification.
-
-For a minimal working example, check out [[https://github.com/grtcdr/forgecast/tree/example][the example branch]] in addition to [[https://grtcdr.tn/forgecast][the live website]].
-
-/Who is using it?/
-
-- https://grtcdr.tn
-
 * Installation
 
 Find and navigate to a project you wish to extend with Forgecast's
@@ -57,6 +45,17 @@ Likewise, you may choose to add it as a submodule:
 #+begin_src sh
 git submodule add https://github.com/grtcdr/forgecast.git
 #+end_src
+
+* Usage
+
+Forgecast is an extension of [[https://orgmode.org/manual/Publishing.html][Org Mode's publishing feature]] and should
+therefore be called from a publishing script, i.e. your project
+specification.
+
+For a minimal working example, check out [[https://github.com/grtcdr/forgecast/tree/example][the example branch]] in
+addition to [[https://grtcdr.tn/forgecast][the live website]].
+
+For something more guided, read [[file:GUIDE.org][this document]].
 
 * Custom instances
 :PROPERTIES:
