@@ -2,24 +2,23 @@
 
 * Introduction
 
-Forgecast provides a set of helper functions that allow linking files
-to their corresponding resource at a remote repository. Forgecast is
-an amalgamation of the words "forge" and "cast"; it should be thought
-of as a tool to "cast documents to their forges".
+Forgecast generalizes and automates the process of linking an /HTML/
+document to its corresponding source document originally written in
+the /Org/ markup language. Forgecast generates URLs that point to a
+specific page in a Git web interface, e.g. the tree view, the blob,
+the blame or edit page, etc.
 
-/How does it work?/
+The following video demonstrates what this process looks like:
 
 [[file:assets/demo.gif]]
 
 /Who is it for?/
 
-If you have built a blog on top of the Org Mode ecosystem of
-libraries, for example [[https://orgmode.org/manual/Project-alist.html][org-publish-project-alist]], then this package
-may help you address transparency and improve accessibility by
-/automatically/ linking your blog posts to their original source for
-you, as well as other kinds of information such as revision history.
+Anyone with a blog or documentation website built on top of the
+=org-publish-project-alist= variable provided by the =ox-publish=
+library.
 
-/What forges does it support?/
+/What web interfaces does it support?/
 
 - GitHub
 - GitLab (and custom instances)
