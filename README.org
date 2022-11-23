@@ -8,9 +8,9 @@ the /Org/ markup language. Forgecast generates URLs that point to a
 specific page in a Git web interface, e.g. the tree view, the blob,
 the blame or edit page, etc.
 
-The following video demonstrates what this process looks like:
+/How does it work?/
 
-[[file:assets/demo.gif]]
+Check out [[https://grtcdr.tn/forgecast][the example website]] to get a feel for the package.
 
 /Who is it for?/
 
@@ -51,10 +51,8 @@ Forgecast is an extension of [[https://orgmode.org/manual/Publishing.html][Org M
 therefore be called from a publishing script, i.e. your project
 specification.
 
-For a minimal working example, check out [[https://github.com/grtcdr/forgecast/tree/example][the example branch]] in
-addition to [[https://grtcdr.tn/forgecast][the live website]].
-
-For something more guided, read [[file:GUIDE.org][this document]].
+- For a minimal working example, check out [[https://github.com/grtcdr/forgecast/tree/example][the example branch]].
+- For something more guided, read [[file:GUIDE.org][this document]].
 
 * Custom instances
 :PROPERTIES:
