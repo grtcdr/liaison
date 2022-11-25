@@ -6,7 +6,6 @@ Forgecast into your website.
 Before we start, we need to import the two most important libraries in
 our publishing script:
 
-#+caption: publish.el
 #+begin_src emacs-lisp
 ;; publish.el
 (require 'ox-publish)
@@ -45,7 +44,6 @@ own format strings. If you intend on using any other format strings,
 such as the preset =%a= or =%e=, don't forget to add them, otherwise
 they won't be expanded.
 
-#+caption: publish.el
 #+begin_src emacs-lisp
 ;; publish.el
 (defun org-html-format-spec (info)
@@ -61,7 +59,6 @@ they won't be expanded.
 The format strings we previously defined need to be placed in an HTML
 file whose job is to be the preamble or postamble.
 
-#+captions: preamble.html
 #+begin_src html
 <!-- templates/preamble.html -->
 <nav style="text-align:center">
@@ -77,7 +74,6 @@ file whose job is to be the preamble or postamble.
 We'll need a way to access the content of these HTML files from our
 publishing script, and this is what the =read-template= function does.
 
-#+captions: publish.el
 #+begin_src emacs-lisp
 ;; publish.el
 (defun read-template (filename)
