@@ -78,7 +78,9 @@ variable and assign it to the =:html-preamble= property of the
 	       :publishing-directory "public/articles"
 	       :publishing-function 'org-html-publish-to-html
 	       :html-preamble preamble
-	       :html-postamble nil))))
+	       :html-postamble nil)
+	 (list "all"
+	       :components "articles"))))
 #+end_src
 
 The website is now properly configured.
