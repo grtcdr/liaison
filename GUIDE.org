@@ -13,6 +13,32 @@ our publishing script:
 (require 'forgecast)
 #+end_src
 
+* Using Forgecast as a macro
+
+Let's register to a macro a Forgecast function which returns the URL
+to the blob page of the current document:
+
+#+begin_src emacs-lisp
+;; publish.el
+(setq org-export-global-macros
+      '(("blob" . "(eval (forgecast-get-resource-url 'blob))")))
+#+end_src
+
+We can now call the =blob= macro in an Org document, and it will
+expand to the string we assigned to it.
+
+#+begin_src org
+,#+TITLE: Example
+
+,* Heading
+
+To view this document in its raw format, follow this link: {{{blob}}}.
+#+end_src
+
+Read the [[Publishing your website][Publishing your website]] section for more information.
+
+* Using Forgecast in your preamble/postamble
+
 The following is a redefinition of a /predefined/ function from the
 =ox-publish.el= library, we override it such as to extend it with our
 own format strings. If you intend on using any other format strings,
@@ -83,7 +109,11 @@ variable and assign it to the =:html-preamble= property of the
 	       :components "articles"))))
 #+end_src
 
-The website is now properly configured.
+Your website is now properly configured to use Forgecast.
+
+Read the [[Publishing your website][Publishing your website]] section for more information.
+
+* Publishing your website
 
 The build system should load the =publish.el= file before calling the
 =org-publish-all= function, and that should look something like:
