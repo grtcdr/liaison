@@ -1,0 +1,182 @@
+#+TITLE:                Forgecast
+#+AUTHOR:               Aziz Ben Ali
+#+EMAIL:                tahaaziz.benali@esprit.tn
+#+LANGUAGE:             en
+#+MACRO:                version 0.2.0
+#+MACRO:                release-date 2022-11-13
+#+TEXINFO_FILENAME:     forgecast.info
+#+TEXINFO_DIR_TITLE:    Org Mode publishing to automate linking pages to their sources
+#+TEXINFO_DIR_CATEGORY: Org Mode publishing extension
+
+This manual is a reference guide for Forgecast {{{version}}}.
+
+- Homepage: https://grtcdr.tn/forgecast
+- Repository: https://github.com/grtcdr/forgecast
+
+* Copying
+:PROPERTIES:
+:COPYING:  t
+:END:
+
+Copyright (C) 2022 Aziz Ben Ali.
+
+#+begin_quote
+Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.3 or
+any later version published by the Free Software Foundation; with no
+Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts. A
+copy of the license is included in the section entitled "GNU Free
+Documentation License".
+#+end_quote
+
+* Installation
+
+Find and navigate to your desired project, and run the following in a
+shell prompt:
+
+#+begin_src sh
+git clone https://github.com/grtcdr/forgecast.git
+#+end_src
+
+It is assumed that you have a publishing script where you define your
+project specification and other configuration variables which affect
+how your website is built, you can name this file =publish.el= and
+execute it from a =Makefile=.
+
+In your publishing script, add the package to the =load-path= and then
+require it like so:
+
+#+begin_src elisp
+(add-to-list 'load-path "forgecast")
+(require 'forgecast)
+#+end_src
+
+You're all set.
+
+* Integration
+
+This section outlines the different steps needed to integrate this
+package into your website, it assumes that you have already created a
+publishing script.
+
+In the previous section you were told to import =forgecast=, but
+you'll also need to import =ox-publish= and any other libraries you
+depend on, in your publishing script.
+
+#+begin_src emacs-lisp
+(require 'ox-publish)
+#+end_src
+
+** Using Forgecast as a macro
+
+This example registers a new =blob= macro which will receive the URL
+to the blob page of the currently visited document.
+
+#+begin_src emacs-lisp
+(setq org-export-global-macros
+      '(("blob" . "(eval (forgecast-get-resource-url 'blob))")))
+#+end_src
+
+We can now call the =blob= macro in an Org document and it will expand
+to the string we assigned to it.
+
+#+begin_src org
+,#+TITLE: Example
+
+,* Heading
+
+To view this document in its raw format, follow this link: {{{blob}}}.
+#+end_src
+
+Read the [[Publishing your website][Publishing your website]] section for more information.
+
+** Using Forgecast in your preamble/postamble
+
+In your publishing script, you will want to redefine the
+=org-html-format-spec= function such as to extend it with your custom
+format strings.
+
+If you intend to use any other format strings, such as the preset =%a=
+or =%e=, don't forget to add them, otherwise they won't be expanded.
+
+#+begin_src emacs-lisp
+(defun org-html-format-spec (info)
+  "Return format specification for preamble and postamble."
+  `((?b . ,(forgecast-get-resource-url 'blob))
+    (?m . ,(forgecast-get-resource-url 'blame))
+    (?t . ,(forgecast-get-resource-url 'tree))
+    (?l . ,(forgecast-get-resource-url 'log))
+    (?p . ,(forgecast-get-resource-url 'plain))
+    (?e . ,(forgecast-get-resource-url 'edit))))
+#+end_src
+
+HTML files, act as preambles and postambles to the Org
+documents we wish to write,
+
+This next step involves preparing your project structure to support
+the use of HTML templates; snippets which will be added onto our Org
+documents. These templates can reference at any point any of the
+format strings defined in the =org-html-format-spec= function.
+
+The following is an example of such a template:
+
+#+begin_src html
+<nav style="text-align:center">
+  <a href="%e"><button>Edit</button></a>
+  <a href="%m"><button>Blame</button></a>
+  <a href="%b"><button>Blob</button></a>
+  <a href="%t"><button>Tree</button></a>
+  <a href="%l"><button>Log</button></a>
+  <a href="%p"><button>Plain</button></a>
+</nav>
+#+end_src
+
+During the export phase, Org will locate the format strings, and
+interpolate them using the return value of their associated function.
+
+We'll now need a way to access the contents of these HTML files from
+our publishing script - to achieve that, you could use something like
+this:
+
+#+begin_src emacs-lisp
+(defun read-template (filename)
+  "Read contents of FILENAME from the templates directory."
+    (with-temp-buffer
+      (insert-file-contents
+       (file-name-concat "templates" filename))
+      (buffer-string)))
+#+end_src
+
+We will use =read-template= along with the =:html-preamble= property
+to inject a preamble into the files of a particular project
+component. 
+
+#+begin_src emacs-lisp
+(setq org-publish-project-alist
+      (let ((preamble (read-template "preamble.html")))
+	(list
+	 (list "articles"
+	       :base-extension "org"
+	       :base-directory "articles"
+	       :publishing-directory "public/articles"
+	       :publishing-function 'org-html-publish-to-html
+	       :html-preamble preamble
+	       :html-postamble nil)
+	 (list "all"
+	       :components "articles"))))
+#+end_src
+
+Your website is now properly configured to use Forgecast.
+
+Read the [[Publishing your website][Publishing your website]] section for more information.
+
+** Publishing your website
+
+The build system should load the publishing script before calling the
+=org-publish-project= function, and that should look something like:
+
+#+begin_src sh
+emacs --quick --batch \
+      --load publish.el \
+      --funcall org-publish-all t t
+#+end_src

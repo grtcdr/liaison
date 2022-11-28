@@ -1,4 +1,5 @@
 #+TITLE: To-dos
+#+TODO: TODO DOING | DONE SCRATCHED
 
 Items tagged with =:sug:= are suggestions received from people from
 somewhere external to this repository. A tag immediatelly following
@@ -21,8 +22,8 @@ somewhere external to this repository. A tag immediatelly following
 ** Add more functionalities [1/1]                                :sourcehut:
 *** DONE Generate a URL for the "blame" page of a document
 * Documentation
-** TODO Write up a Texinfo manual
+** DOING Write up a Texinfo manual
 ** DONE Include a minimal reproducible example
-** DONE Include a video demonstration of real-world example
+** SCRATCHED Include a video demonstration of real-world example
 * Bugs
 ** DONE Fix example website using incorrect blob resource URL 
