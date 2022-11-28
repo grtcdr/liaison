@@ -3,19 +3,24 @@
 This document outlines the different steps needed to integrate
 Forgecast into your website.
 
-Before we start, we need to import the two most important libraries in
-our publishing script:
+Before we start, this guide assumes that:
+1. You have a pulishing script where you define your project
+   specification and other configuration variables which affect how
+   your website is built.
+2. You have installed Forgecast somewhere within your project.
+
+In the publishing script, you will have to import both =ox-publish=
+and =forgecast= as well as any other libraries you depend on.
 
 #+begin_src emacs-lisp
-;; publish.el
 (require 'ox-publish)
 (require 'forgecast)
 #+end_src
 
 * Using Forgecast as a macro
 
-Let's register to a macro a Forgecast function which returns the URL
-to the blob page of the current document:
+Let's register to a =blob= macro the function which returns the URL to
+the blob page of the currently visited document:
 
 #+begin_src emacs-lisp
 ;; publish.el
@@ -23,8 +28,8 @@ to the blob page of the current document:
       '(("blob" . "(eval (forgecast-get-resource-url 'blob))")))
 #+end_src
 
-We can now call the =blob= macro in an Org document, and it will
-expand to the string we assigned to it.
+We can now call the =blob= macro in an Org document and it will expand
+to the string we assigned to it.
 
 #+begin_src org
 ,#+TITLE: Example
