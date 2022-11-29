@@ -40,7 +40,7 @@ Documentation License".
 @node Top
 @top Forgecast
 
-This manual is a reference guide for Forgecast 0.2.0.
+This manual is a reference guide for Forgecast 0.2.0, first released on 2022-11-13.
 
 @itemize
 @item

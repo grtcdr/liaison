@@ -21,7 +21,8 @@ File: forgecast.info,  Node: Top,  Next: Installation,  Up: (dir)
 Forgecast
 *********
 
-This manual is a reference guide for Forgecast 0.2.0.
+This manual is a reference guide for Forgecast 0.2.0, first released on
+2022-11-13.
 
    • Homepage: <https://grtcdr.tn/forgecast>
    • Repository: <https://github.com/grtcdr/forgecast>
@@ -204,11 +205,11 @@ The build system should load the publishing script before calling the
 
 Tag Table:
 Node: Top667
-Node: Installation1116
-Node: Integration1813
-Node: Using Forgecast as a macro2403
-Node: Using Forgecast in your preamble/postamble3130
-Node: Publishing your website6197
+Node: Installation1146
+Node: Integration1843
+Node: Using Forgecast as a macro2433
+Node: Using Forgecast in your preamble/postamble3160
+Node: Publishing your website6227
 
 End Tag Table
 

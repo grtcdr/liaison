@@ -8,7 +8,7 @@
 #+TEXINFO_DIR_TITLE:    Org Mode publishing to automate linking pages to their sources
 #+TEXINFO_DIR_CATEGORY: Org Mode publishing extension
 
-This manual is a reference guide for Forgecast {{{version}}}.
+This manual is a reference guide for Forgecast {{{version}}}, first released on {{{release-date}}}.
 
 - Homepage: https://grtcdr.tn/forgecast
 - Repository: https://github.com/grtcdr/forgecast
