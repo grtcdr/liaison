@@ -25,18 +25,17 @@
 
 ;;; Code:
 
-(require 'project)
 (require 'vc)
 
 (defvar forgecast-forge-alist
-  '(("github.com" . #'forgecast--build-github-resource-url)
-    ("gitlab.com" . #'forgecast--build-gitlab-resource-url)
-    ("codeberg.org" . #'forgecast--build-gitea-resource-url)
-    ("git.sr.ht" . #'forgecast--build-sourcehut-resource-url)
-    ("git.savannah.gnu.org/cgit" . #'forgecast--build-cgit-resource-url)
+  '(("github.com"                   . #'forgecast--build-github-resource-url)
+    ("gitlab.com"                   . #'forgecast--build-gitlab-resource-url)
+    ("codeberg.org"                 . #'forgecast--build-gitea-resource-url)
+    ("git.sr.ht"                    . #'forgecast--build-sourcehut-resource-url)
+    ("git.savannah.gnu.org/cgit"    . #'forgecast--build-cgit-resource-url)
     ("git.savannah.nongnu.org/cgit" . #'forgecast--build-cgit-resource-url))
   "Alist of forges and their corresponding function which is used to
-build their resource URLs")
+build their resource URLs.")
 
 (defun forgecast--forge-function (forge)
   (alist-get forge forgecast-forge-alist nil nil #'string=))
