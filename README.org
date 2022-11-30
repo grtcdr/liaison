@@ -52,7 +52,7 @@ therefore be called from a publishing script, i.e. your project
 specification.
 
 - For a minimal working example, check out [[https://github.com/grtcdr/forgecast/tree/example][the example branch]].
-- For something more guided, read [[file:GUIDE.org][this document]].
+- For something more guided, read the [[https://grtcdr.tn/forgecast/doc/forgecast.html][online manual]].
 
 * Custom instances
 :PROPERTIES:
