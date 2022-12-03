@@ -1,12 +1,12 @@
 ;;; publish.el --- A minimal publishing script.
 
 (require 'ox-publish)
-
-;; Add subdirectories of the current working directory to the load-path
-(normal-top-level-add-subdirs-to-load-path)
+(require 'project)
 
 ;; Require the library
-(require 'forgecast)
+(let ((default-directory (project-root (project-current))))
+  (add-to-list 'load-path default-directory)
+  (require 'forgecast))
 
 ;; You don't have to necessarily set these variables
 (setq org-publish-timestamp-directory ".cache/"
