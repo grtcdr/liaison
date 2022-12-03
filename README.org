@@ -1,7 +1,5 @@
 #+TITLE: Forgecast
 
-* Introduction
-
 Forgecast generalizes and automates the process of linking an /HTML/
 document to its corresponding source document originally written in
 the /Org/ markup language. Forgecast generates URLs that point to a
@@ -10,7 +8,8 @@ the blame or edit page, etc.
 
 /How does it work?/
 
-Check out [[https://grtcdr.tn/forgecast][the example website]] to get a feel for the package.
+Check out [[https://grtcdr.tn/forgecast][the project's website]] to get a feel for what the package can
+do.
 
 /Who is it for?/
 
