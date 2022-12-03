@@ -1,0 +1,17 @@
+#+TITLE: Forgecast
+
+Forgecast generalizes and automates the process of linking an HTML
+document to its corresponding source document originally written in
+the Org markup language.
+
+This page serves no real purpose other than to demonstrate the
+principal functionality of this package, which is what generated the
+URLs you find beneath every blog post.
+
+The contents of the blog posts are mumbo-jumbo, do not attempt to read
+them - this is, after all, purely a demonstration.
+
+-----
+
+#+INCLUDE: "../public/articles/coffee.html" export html
+#+INCLUDE: "../public/articles/cheese.html" export html

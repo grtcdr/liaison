@@ -1,0 +1,23 @@
+nav {
+  padding-top: 1em;
+}
+
+nav > ul {
+  padding: 0;
+  list-style-type: none;
+  text-align: center;
+}
+
+nav > ul li {
+  display: inline-block;
+  font-size: 1.25em;
+}
+
+nav > ul li+li:before {
+  padding: 0 0.7em;
+  content: '/';
+}
+
+nav ul li > a {
+  text-decoration: none;
+}
