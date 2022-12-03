@@ -22,9 +22,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-        with:
-          ref: example
-          submodules: true
 
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v1
@@ -35,12 +32,14 @@ jobs:
           version: snapshot
 
       - name: Build website
-        run: make
+        run: |
+             cd doc/site
+             make
 
       - name: Upload website blob
         uses: actions/upload-pages-artifact@v1
         with:
-          path: public
+          path: doc/site/public
 
   deploy:
     environment:
