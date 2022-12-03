@@ -157,9 +157,6 @@ or @samp{%e}, don't forget to add them, otherwise they won't be expanded.
     (?e . ,(forgecast-get-resource-url 'edit))))
 @end lisp
 
-HTML files, act as preambles and postambles to the Org
-documents we wish to write,
-
 This next step involves preparing your project structure to support
 the use of HTML templates; snippets which will be added onto our Org
 documents. These templates can reference at any point any of the

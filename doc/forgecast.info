@@ -134,9 +134,6 @@ expanded.
          (?p . ,(forgecast-get-resource-url 'plain))
          (?e . ,(forgecast-get-resource-url 'edit))))
 
-   HTML files, act as preambles and postambles to the Org documents we
-wish to write,
-
    This next step involves preparing your project structure to support
 the use of HTML templates; snippets which will be added onto our Org
 documents.  These templates can reference at any point any of the format
@@ -209,7 +206,7 @@ Node: Installation1146
 Node: Integration1843
 Node: Using Forgecast as a macro2433
 Node: Using Forgecast in your preamble/postamble3160
-Node: Publishing your website6227
+Node: Publishing your website6140
 
 End Tag Table
 
