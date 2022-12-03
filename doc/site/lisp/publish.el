@@ -8,8 +8,10 @@
 ;; Require the library
 (require 'forgecast)
 
-;; Configure the location of the build cache
-(setq org-publish-timestamp-directory ".cache/")
+;; You don't have to necessarily set these variables
+(setq org-publish-timestamp-directory ".cache/"
+      org-src-fontify-natively nil
+      org-html-htmlize-output-type nil)
 
 (defun my/read-template (filename)
   "Read contents of FILENAME from the templates directory."
@@ -25,7 +27,7 @@
      "<link rel=\"stylesheet\" href=\"https://grtcdr.tn/forgecast/css/main.css\">")
    "\n"))
 
-;;; Redefinition of built-in org-html-format-spec:
+;; Redefinition of built-in org-html-format-spec
 (defun org-html-format-spec (info)
   "Return format specification for preamble and postamble.
 INFO is a plist used as a communication channel."
@@ -36,7 +38,7 @@ INFO is a plist used as a communication channel."
     (?p . ,(forgecast-get-resource-url 'plain))
     (?e . ,(forgecast-get-resource-url 'edit))))
 
-;;; Project specification:
+;; Project specification
 (setq org-publish-project-alist
       (let ((postamble (my/read-template "postamble.html"))
 	    (preamble (my/read-template "preamble.html"))
@@ -60,8 +62,8 @@ INFO is a plist used as a communication channel."
 	       :html-postamble postamble)
 	 (list "documentation"
 	       :base-extension "org"
-	       :base-directory "lisp/forgecast/doc/"
-	       :publishing-directory "public/doc/"
+	       :base-directory "../manual/"
+	       :publishing-directory "public/manual/"
 	       :publishing-function 'org-html-publish-to-html
 	       :html-head html-head
 	       :html-preamble preamble

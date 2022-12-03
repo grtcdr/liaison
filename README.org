@@ -50,7 +50,8 @@ Forgecast is an extension of [[https://orgmode.org/manual/Publishing.html][Org M
 therefore be called from a publishing script, i.e. your project
 specification.
 
-- For a minimal working example, check out [[https://github.com/grtcdr/forgecast/tree/example][the example branch]].
+- For a minimal working example, check out the source code of this
+  [[file:doc/site/][project's website]].
 - For something more guided, read the [[https://grtcdr.tn/forgecast/doc/forgecast.html][online manual]].
 
 * Custom instances
