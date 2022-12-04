@@ -3,34 +3,30 @@
 (require 'ox-publish)
 (require 'project)
 
-;; Require the library
+;; Import the library
 (let ((default-directory (project-root (project-current))))
   (add-to-list 'load-path default-directory)
   (require 'forgecast))
 
-;; You don't have to necessarily set these variables
+;; You don't necessarily have to set these variables
 (setq org-publish-timestamp-directory ".cache/"
       org-src-fontify-natively nil
       org-html-htmlize-output-type nil)
 
-(defun my/read-template (filename)
+(defun site/read-template (filename)
   "Read contents of FILENAME from the templates directory."
   (with-temp-buffer
     (insert-file-contents
      (file-name-concat "src" "templates" filename))
     (buffer-string)))
 
-(defun my/html-head ()
-  "Return HTML headers used throughout the website."
-  (string-join
-   '("<link rel=\"stylesheet\" href=\"https://cdn.simplecss.org/simple.min.css\">"
-     "<link rel=\"stylesheet\" href=\"https://grtcdr.tn/forgecast/css/main.css\">")
-   "\n"))
+(defvar site/html-head
+  "<link rel=\"stylesheet\" href=\"https://cdn.simplecss.org/simple.min.css\">"
+  "HTML header shared across projects.")
 
-;; Redefinition of built-in org-html-format-spec
+;; Redefinition of built-in function
 (defun org-html-format-spec (info)
-  "Return format specification for preamble and postamble.
-INFO is a plist used as a communication channel."
+  "Return format specification for preamble and postamble."
   `((?b . ,(forgecast-get-resource-url 'blob))
     (?m . ,(forgecast-get-resource-url 'blame))
     (?t . ,(forgecast-get-resource-url 'tree))
@@ -40,38 +36,40 @@ INFO is a plist used as a communication channel."
 
 ;; Project specification
 (setq org-publish-project-alist
-      (let ((postamble (my/read-template "postamble.html"))
-	    (preamble (my/read-template "preamble.html"))
-	    (html-head (my/html-head)))
+      (let ((main-preamble (site/read-template "main-preamble.html"))
+	    (article-postamble (site/read-template "article-postamble.html"))
+	    (manual-preamble (site/read-template "manual-preamble.html")))
 	(list
-	 (list "main"
+	 (list "main" ;; This specifies how files at the root of the site get published
 	       :base-extension "org"
 	       :base-directory "src/"
 	       :publishing-directory "public/"
 	       :publishing-function 'org-html-publish-to-html
-	       :html-head html-head
-	       :html-preamble preamble
+	       :html-head (concat site/html-head "\n"
+				  "<link rel=\"stylesheet\" href=\"css/main.css\">")
+	       :html-preamble main-preamble
 	       :html-postamble nil)
-	 (list "articles"
+	 (list "articles" ;; This specifies how articles get published
 	       :base-extension "org"
 	       :base-directory "src/articles/"
 	       :publishing-directory "public/articles/"
 	       :publishing-function 'org-html-publish-to-html
-	       :html-head html-head
+	       :html-head site/html-head
 	       :html-preamble nil
-	       :html-postamble postamble)
-	 (list "documentation"
+	       :html-postamble article-postamble)
+	 (list "manual" ;; This specifies how the manual gets published
 	       :base-extension "org"
 	       :base-directory "../manual/"
 	       :publishing-directory "public/manual/"
 	       :publishing-function 'org-html-publish-to-html
-	       :html-head html-head
-	       :html-preamble preamble
+	       :html-head (concat site/html-head "\n"
+				  "<link rel=\"stylesheet\" href=\"../css/main.css\">")
+	       :html-preamble manual-preamble
 	       :html-postamble nil)
-	 (list "css"
+	 (list "css" ;; This specifies how stylesheets get published
 	       :base-extension "css"
 	       :base-directory "src/css"
-	       :publishing-directory "public/css"
+	       :publishing-directory "public/css/"
 	       :publishing-function 'org-publish-attachment)
-	 (list "all"
-	       :components '("articles" "documentation" "main" "css")))))
+	 (list "all" ;; This combines all the previous projects
+	       :components '("articles" "manual" "main" "css")))))
