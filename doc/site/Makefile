@@ -4,7 +4,7 @@ build:
 	@emacs --quick --batch --load publish.el --funcall org-publish-all t t
 
 serve: build
-	@miniserve public --route-prefix=forgecast
+	@miniserve public --route-prefix=forgecast --index=index.html
 
 clean:
 	@rm -rvf "public/"
