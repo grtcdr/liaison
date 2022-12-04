@@ -9,9 +9,7 @@ principal functionality of this package, which is what generated the
 URLs you find beneath every blog post.
 
 The contents of the blog posts are mumbo-jumbo, do not attempt to read
-them - this is, after all, purely a demonstration.
-
------
+them -- this is, after all, just a demonstration.
 
 #+INCLUDE: "../public/articles/coffee.html" export html
 #+INCLUDE: "../public/articles/cheese.html" export html

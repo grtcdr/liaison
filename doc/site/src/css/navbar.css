@@ -1,11 +1,11 @@
 nav {
-  padding-top: 1em;
+  padding-top: 0.2em;
 }
 
 nav > ul {
-  padding: 0;
   list-style-type: none;
   text-align: center;
+  padding: 0;
 }
 
 nav > ul li {
@@ -14,8 +14,8 @@ nav > ul li {
 }
 
 nav > ul li+li:before {
-  padding: 0 0.7em;
   content: '/';
+  padding: 0 0.7em;
 }
 
 nav ul li > a {

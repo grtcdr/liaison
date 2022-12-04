@@ -11,7 +11,8 @@
 ;; You don't necessarily have to set these variables
 (setq org-publish-timestamp-directory ".cache/"
       org-src-fontify-natively nil
-      org-html-htmlize-output-type nil)
+      org-html-htmlize-output-type nil
+      org-html-head-include-default-style nil)
 
 (defun site/read-template (filename)
   "Read contents of FILENAME from the templates directory."
@@ -23,6 +24,10 @@
 (defvar site/html-head
   "<link rel=\"stylesheet\" href=\"https://cdn.simplecss.org/simple.min.css\">"
   "HTML header shared across projects.")
+
+(defun site/stylesheet (filename)
+  "Format filename as a stylesheet."
+  (format "<link rel=\"stylesheet\" href=\"%s\">" filename))
 
 ;; Redefinition of built-in function
 (defun org-html-format-spec (info)
@@ -46,7 +51,8 @@
 	       :publishing-directory "public/"
 	       :publishing-function 'org-html-publish-to-html
 	       :html-head (concat site/html-head "\n"
-				  "<link rel=\"stylesheet\" href=\"css/main.css\">")
+				  (site/stylesheet "css/navbar.css")
+				  (site/stylesheet "css/metadata.css"))
 	       :html-preamble main-preamble
 	       :html-postamble nil)
 	 (list "articles" ;; This specifies how articles get published
@@ -54,7 +60,6 @@
 	       :base-directory "src/articles/"
 	       :publishing-directory "public/articles/"
 	       :publishing-function 'org-html-publish-to-html
-	       :html-head site/html-head
 	       :html-preamble nil
 	       :html-postamble article-postamble)
 	 (list "manual" ;; This specifies how the manual gets published
@@ -63,7 +68,7 @@
 	       :publishing-directory "public/manual/"
 	       :publishing-function 'org-html-publish-to-html
 	       :html-head (concat site/html-head "\n"
-				  "<link rel=\"stylesheet\" href=\"../css/main.css\">")
+				  (site/stylesheet "../css/navbar.css"))
 	       :html-preamble manual-preamble
 	       :html-postamble nil)
 	 (list "css" ;; This specifies how stylesheets get published
