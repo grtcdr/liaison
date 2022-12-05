@@ -1,0 +1,21 @@
+.meta > ul {
+  list-style-type: none;
+  text-align: center;
+  padding: 0;
+}
+
+.meta > ul li {
+  display: inline-block;
+  font-weight: 300;
+  text-transform: uppercase;
+}
+
+.meta > ul li+li:before {
+  content: '|';
+  color: #5F5F5F;
+  padding: 0 1.1em;
+}
+
+.meta ul li > a {
+  color: #607EAA;
+}
