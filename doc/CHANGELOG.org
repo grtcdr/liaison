@@ -12,7 +12,8 @@ listed here are not exhaustive.
 + First efforts in writing a manual for reading within Emacs as well
   as an online resource that can be viewed at
   [[https://grtcdr.tn/liaison/manual/liaison.html]].
-+ Bring the source code of https://grtcdr.tn/forgecast to the =main= branch instead of
++ Bring the source code of https://grtcdr.tn/forgecast to the =main=
+  branch instead of the =example= branch.
 + Refactor =forgecast--build-sourcehut-resource-url=.
 + Rename package from *"Forgecast"* to *"Liaison"*, see issue [[https://github.com/grtcdr/liaison/issues/4][#4]] for
   more information.
