@@ -1,0 +1,42 @@
+#+TITLE: Changelog
+
+This document tracks the changes of this package throughout time (in
+chronological order) and in between releases. Note that the changes
+listed here are not exhaustive.
+
+* 0.3.0
+
++ =forgecast-get-resource-url=: Do no trim the return value of
+  =forgecast--forge-function= as it may return nil, which causes an
+  error that halts the publishing process.
++ First efforts in writing a manual for reading within Emacs as well
+  as an online resource that can be viewed at
+  https://grtcdr.tn/forgecast/manual/forgecast.html.
++ Bring the source code of https://grtcdr.tn/forgecast to the =main= branch instead of
++ Refactor =forgecast--build-sourcehut-resource-url=.
++ Rename package from *"Forgecast"* to *"Liaison"*, see issue [[https://github.com/grtcdr/liaison/issues/4][#4]] for
+  more information.
++ Remove the video demonstration as the functionalities and purpose of
+  this package are straightforward enough to comprehend without one.
++ Add a =CHANGELOG.org= file for tracking progress in between releases.
++ Publish =TODO.org= and =CHANGELOG.org= on the website.
+
+* 0.2.0
+
++ Privatize previously public functions.
++ Add a video demonstration.
++ Support more web pages (endpoints) for the supported backends.
++ Add support for GitLab as well as custom instances.
++ Add support for Gitea and custom instances.
++ Add support for cgit and custom instances.
++ Refactor the functions (their inputs and outputs) and infer
+  parameters instead of requiring them.
++ Rename =forgecast-forge-plist= to =forgecast-forge-alist=.
++ Fix internal bugs related to the URL processing logic of multiple
+  backends.
+  
+* 0.1.0
+
++ Release the source code under the GPLv3.
++ Create a website - whose source is located in the =example= branch -
+  as a means to demonstrate the functionalities of this package.

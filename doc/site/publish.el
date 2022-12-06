@@ -32,15 +32,17 @@
 ;; You don't necessarily have to set these variables
 (setq org-publish-timestamp-directory ".cache/"
       org-src-fontify-natively nil
+      org-html-preamble nil
+      org-html-postamble nil
+      org-html-doctype "html5"
       org-html-htmlize-output-type nil
       org-html-head-include-default-style nil)
 
-(defun site/read-template (filename)
-  "Read contents of FILENAME from the templates directory."
-  (with-temp-buffer
-    (insert-file-contents
-     (file-name-concat "src" "templates" filename))
-    (buffer-string)))
+(defvar site/alternate-divs
+  '((preamble "div" "_preamble")
+    (content "div" "_content")
+    (postamble "div" "_postamble"))
+  "Defines an alternate div format which avoids duplicate identifiers.")
 
 (defun site/link (rel href)
   "Format as a ’link’ tag, a resource located at HREF with a
@@ -49,14 +51,9 @@ relationship of REL."
    `(link ((rel . ,rel)
 	   (href . ,href)))))
 
-(defvar site/alternate-divs
-  '((preamble "div" "_preamble")
-    (content "div" "_content")
-    (postamble "div" "_postamble"))
-  "Defines an alternate div format which avoids duplicate identifiers.")
-
 (defvar site/html-head
   (concat
+   (shr-dom-to-xml '(base ((href . "/liaison/"))))
    (site/link "stylesheet" "https://grtcdr.tn/css/common.css")
    (site/link "stylesheet" "https://grtcdr.tn/css/heading.css")
    (site/link "stylesheet" "https://grtcdr.tn/css/source.css")
@@ -76,40 +73,90 @@ relationship of REL."
     (?p . ,(liaison-get-resource-url 'plain))
     (?e . ,(liaison-get-resource-url 'edit))))
 
+(defvar main-preamble
+      (shr-dom-to-xml
+       '(nav nil
+	     (ul nil
+		 (li nil
+		     (a ((href . "https://grtcdr.tn"))
+			"grtcdr.tn"))
+		 (li nil
+		     (a ((href . "index.html")) "liaison"))
+		 (li nil
+		     (a ((href . "manual/liaison.html"))
+			"manual"))
+		 (li nil
+		     (a ((href . "CHANGELOG.html"))
+			"changelog"))
+		 (li nil
+		     (a ((href . "TODO.html"))
+			"to-dos"))
+		 (li nil
+		     (a ((href . "https://github.com/grtcdr/liaison"))
+			"github")))))
+      "Define the HTML snippet/template used as a preamble.")
+
+(defvar article-postamble
+      (shr-dom-to-xml
+       '(div ((class . "meta"))
+	     (ul nil
+		 (li nil
+		     (a ((href . "%e"))
+			"edit"))
+		 (li nil
+		     (a ((href . "%m"))
+			"blame"))
+		 (li nil
+		     (a ((href . "%b"))
+			"blob"))
+		 (li nil
+		     (a ((href . "%t"))
+			"tree"))
+		 (li nil
+		     (a ((href . "%l"))
+			"log"))
+		 (li nil
+		     (a ((href . "%p"))
+			"plain")))))
+      "Define the HTML snippet/template used as postamble for articles.")
+
 ;; Project specification
 (setq org-publish-project-alist
-      (let ((main-preamble (site/read-template "main-preamble.html"))
-	    (article-postamble (site/read-template "article-postamble.html"))
-	    (manual-preamble (site/read-template "manual-preamble.html")))
-	(list
-	 (list "main" ;; This specifies how files at the root of the site get published
-	       :base-extension "org"
-	       :base-directory "src/"
-	       :publishing-directory "public/"
-	       :publishing-function 'org-html-publish-to-html
-	       :html-head (concat site/html-head (site/link "stylesheet" "css/meta.css"))
-	       :html-preamble main-preamble
-	       :html-postamble nil)
-	 (list "articles" ;; This specifies how articles get published
-	       :base-extension "org"
-	       :base-directory "src/articles/"
-	       :publishing-directory "public/articles/"
-	       :publishing-function 'org-html-publish-to-html
-	       :html-divs site/alternate-divs
-	       :html-preamble nil
-	       :html-postamble article-postamble)
-	 (list "manual" ;; This specifies how the manual gets published
-	       :base-extension "org"
-	       :base-directory "../manual/"
-	       :publishing-directory "public/manual/"
-	       :publishing-function 'org-html-publish-to-html
-	       :html-head site/html-head
-	       :html-preamble manual-preamble
-	       :html-postamble nil)
-	 (list "css" ;; This specifies how stylesheets get published
-	       :base-extension "css"
-	       :base-directory "src/css"
-	       :publishing-directory "public/css/"
-	       :publishing-function 'org-publish-attachment)
-	 (list "all" ;; This combines all the previous projects
-	       :components '("articles" "manual" "main" "css")))))
+      (list
+       (list "main" ;; This specifies how files at the root of the site get published
+	     :base-extension "org"
+	     :base-directory "src/"
+	     :publishing-directory "public/"
+	     :publishing-function 'org-html-publish-to-html
+	     :html-head (concat site/html-head (site/link "stylesheet" "css/meta.css"))
+	     :html-preamble main-preamble)
+       (list "articles" ;; This specifies how articles get published
+	     :base-extension "org"
+	     :base-directory "src/articles/"
+	     :publishing-directory "public/articles/"
+	     :publishing-function 'org-html-publish-to-html
+	     :html-divs site/alternate-divs
+	     :html-postamble article-postamble)
+       (list "manual" ;; This specifies how the manual gets published
+	     :base-extension "org"
+	     :base-directory "../manual/"
+	     :publishing-directory "public/manual/"
+	     :publishing-function 'org-html-publish-to-html
+	     :html-head site/html-head
+	     :html-preamble main-preamble)
+       (list "doc" ;; This specifies how general documentation gets published
+	     :base-extension "org"
+	     :base-directory "../"
+	     :publishing-directory "public/"
+	     :publishing-function 'org-html-publish-to-html
+	     :with-toc nil
+	     :section-numbers nil
+	     :html-head site/html-head
+	     :html-preamble main-preamble)
+       (list "css" ;; This specifies how stylesheets get published
+	     :base-extension "css"
+	     :base-directory "src/css"
+	     :publishing-directory "public/css/"
+	     :publishing-function 'org-publish-attachment)
+       (list "all" ;; This combines all the previous projects
+	     :components '("articles" "doc" "manual" "main" "css"))))

@@ -13,8 +13,7 @@ somewhere external to this repository. A tag immediatelly following
 *** DONE Codeberg
 *** DONE GitLab
 ** Inline commit history macro [0/2]                          :sug:yantar92:
-I believe this should be implemented in a separate package.
-
+I believe this feature should be implemented in a separate package.
 *** TODO Retrieve commit history of a file
 *** TODO Implement the macro
 ** Add more functionalities [3/3]                                   :github:
