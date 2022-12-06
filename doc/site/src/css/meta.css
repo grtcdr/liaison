@@ -4,11 +4,6 @@
   padding: 0;
 }
 
-ul .alt {
-  margin: 0;
-  font-size: 0.6em;
-}
-
 .meta > ul li {
   display: inline-block;
   font-weight: 300;

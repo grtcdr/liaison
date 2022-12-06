@@ -29,21 +29,6 @@
   (add-to-list 'load-path default-directory)
   (require 'liaison))
 
-;; You don't necessarily have to set these variables
-(setq org-publish-timestamp-directory ".cache/"
-      org-src-fontify-natively nil
-      org-html-preamble nil
-      org-html-postamble nil
-      org-html-doctype "html5"
-      org-html-htmlize-output-type nil
-      org-html-head-include-default-style nil)
-
-(defvar site/alternate-divs
-  '((preamble "div" "_preamble")
-    (content "div" "_content")
-    (postamble "div" "_postamble"))
-  "Defines an alternate div format which avoids duplicate identifiers.")
-
 (defun site/link (rel href)
   "Format as a ’link’ tag, a resource located at HREF with a
 relationship of REL."
@@ -94,31 +79,48 @@ relationship of REL."
 		 (li nil
 		     (a ((href . "https://github.com/grtcdr/liaison"))
 			"github")))))
-      "Define the HTML snippet/template used as a preamble.")
+      "Define an HTML snippet/template used as a preamble across all
+projects.")
 
 (defvar article-postamble
-      (shr-dom-to-xml
-       '(div ((class . "meta"))
-	     (ul nil
-		 (li nil
-		     (a ((href . "%e"))
-			"edit"))
-		 (li nil
-		     (a ((href . "%m"))
-			"blame"))
-		 (li nil
-		     (a ((href . "%b"))
-			"blob"))
-		 (li nil
-		     (a ((href . "%t"))
-			"tree"))
-		 (li nil
-		     (a ((href . "%l"))
-			"log"))
-		 (li nil
-		     (a ((href . "%p"))
-			"plain")))))
-      "Define the HTML snippet/template used as postamble for articles.")
+  (shr-dom-to-xml
+   '(div ((class . "meta"))
+	 (ul nil
+	     (li nil
+		 (a ((href . "%e"))
+		    "edit"))
+	     (li nil
+		 (a ((href . "%m"))
+		    "blame"))
+	     (li nil
+		 (a ((href . "%b"))
+		    "blob"))
+	     (li nil
+		 (a ((href . "%t"))
+		    "tree"))
+	     (li nil
+		 (a ((href . "%l"))
+		    "log"))
+	     (li nil
+		 (a ((href . "%p"))
+		    "plain")))))
+  "Define an HTML snippet/template used as a postamble by the
+articles project.")
+
+(defvar site/alternate-divs
+  '((preamble "div" "_preamble")
+    (content "div" "_content")
+    (postamble "div" "_postamble"))
+  "Defines an alternate div format which avoids duplicate identifiers.")
+
+;; You don't necessarily have to set these variables
+(setq org-publish-timestamp-directory ".cache/"
+      org-src-fontify-natively nil
+      org-html-preamble nil
+      org-html-postamble nil
+      org-html-doctype "html5"
+      org-html-htmlize-output-type nil
+      org-html-head-include-default-style nil)
 
 ;; Project specification
 (setq org-publish-project-alist

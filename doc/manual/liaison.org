@@ -8,10 +8,11 @@
 #+TEXINFO_DIR_TITLE:    Org Mode publishing to automate linking pages to their sources
 #+TEXINFO_DIR_CATEGORY: Org Mode publishing extension
 
-This manual is a reference guide for Liaison {{{version}}}, first released on {{{release-date}}}.
+This manual is a reference guide for Liaison {{{version}}}, first
+released on {{{release-date}}}.
 
-- Homepage: [[https://grtcdr.tn/liaison]]
-- Repository: [[https://github.com/grtcdr/liaison]]
+- Homepage: <[[https://grtcdr.tn/liaison]]>
+- Repository: <[[https://github.com/grtcdr/liaison]]>
 
 * Copying
 :PROPERTIES:

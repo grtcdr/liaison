@@ -11,7 +11,7 @@ listed here are not exhaustive.
   error that halts the publishing process.
 + First efforts in writing a manual for reading within Emacs as well
   as an online resource that can be viewed at
-  https://grtcdr.tn/forgecast/manual/forgecast.html.
+  [[https://grtcdr.tn/liaison/manual/liaison.html]].
 + Bring the source code of https://grtcdr.tn/forgecast to the =main= branch instead of
 + Refactor =forgecast--build-sourcehut-resource-url=.
 + Rename package from *"Forgecast"* to *"Liaison"*, see issue [[https://github.com/grtcdr/liaison/issues/4][#4]] for
