@@ -3,7 +3,7 @@
 ;; Copyright (C) 2022 Aziz Ben Ali
 
 ;; Author: Aziz Ben Ali <tahaaziz.benali@esprit.tn>
-;; Homepage: https://github.com/grtcdr/forgecast
+;; Homepage: https://github.com/grtcdr/liaison
 
 ;; publish.el is free software: you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published
@@ -27,7 +27,7 @@
 ;; Import the library
 (let ((default-directory (project-root (project-current))))
   (add-to-list 'load-path default-directory)
-  (require 'forgecast))
+  (require 'liaison))
 
 ;; You don't necessarily have to set these variables
 (setq org-publish-timestamp-directory ".cache/"
@@ -69,12 +69,12 @@ relationship of REL."
 ;; Redefinition of built-in function
 (defun org-html-format-spec (info)
   "Return a list of format strings representing the format specification."
-  `((?b . ,(forgecast-get-resource-url 'blob))
-    (?m . ,(forgecast-get-resource-url 'blame))
-    (?t . ,(forgecast-get-resource-url 'tree))
-    (?l . ,(forgecast-get-resource-url 'log))
-    (?p . ,(forgecast-get-resource-url 'plain))
-    (?e . ,(forgecast-get-resource-url 'edit))))
+  `((?b . ,(liaison-get-resource-url 'blob))
+    (?m . ,(liaison-get-resource-url 'blame))
+    (?t . ,(liaison-get-resource-url 'tree))
+    (?l . ,(liaison-get-resource-url 'log))
+    (?p . ,(liaison-get-resource-url 'plain))
+    (?e . ,(liaison-get-resource-url 'edit))))
 
 ;; Project specification
 (setq org-publish-project-alist

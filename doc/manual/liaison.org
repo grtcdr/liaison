@@ -1,17 +1,17 @@
-#+TITLE:                Forgecast
+#+TITLE:                Liaison
 #+AUTHOR:               Aziz Ben Ali
 #+EMAIL:                tahaaziz.benali@esprit.tn
 #+LANGUAGE:             en
 #+MACRO:                version 0.2.0
 #+MACRO:                release-date 2022-11-13
-#+TEXINFO_FILENAME:     forgecast.info
+#+TEXINFO_FILENAME:     liaison.info
 #+TEXINFO_DIR_TITLE:    Org Mode publishing to automate linking pages to their sources
 #+TEXINFO_DIR_CATEGORY: Org Mode publishing extension
 
-This manual is a reference guide for Forgecast {{{version}}}, first released on {{{release-date}}}.
+This manual is a reference guide for Liaison {{{version}}}, first released on {{{release-date}}}.
 
-- Homepage: https://grtcdr.tn/forgecast
-- Repository: https://github.com/grtcdr/forgecast
+- Homepage: [[https://grtcdr.tn/liaison]]
+- Repository: [[https://github.com/grtcdr/liaison]]
 
 * Copying
 :PROPERTIES:
@@ -35,7 +35,7 @@ Find and navigate to your desired project, and run the following in a
 shell prompt:
 
 #+begin_src sh
-git clone https://github.com/grtcdr/forgecast.git
+git clone https://github.com/grtcdr/liaison.git
 #+end_src
 
 It is assumed that you have a publishing script where you define your
@@ -47,8 +47,8 @@ In your publishing script, add the package to the =load-path= and then
 require it like so:
 
 #+begin_src elisp
-(add-to-list 'load-path "forgecast")
-(require 'forgecast)
+(add-to-list 'load-path "liaison")
+(require 'liaison)
 #+end_src
 
 You're all set.
@@ -59,7 +59,7 @@ This section outlines the different steps needed to integrate this
 package into your website, it assumes that you have already created a
 publishing script.
 
-In the previous section you were told to import =forgecast=, but
+In the previous section you were told to import =liaison=, but
 you'll also need to import =ox-publish= and any other libraries you
 depend on, in your publishing script.
 
@@ -67,14 +67,14 @@ depend on, in your publishing script.
 (require 'ox-publish)
 #+end_src
 
-** Using Forgecast as a macro
+** Using Liaison as a macro
 
 This example registers a new =blob= macro which will receive the URL
 to the blob page of the currently visited document.
 
 #+begin_src emacs-lisp
 (setq org-export-global-macros
-      '(("blob" . "(eval (forgecast-get-resource-url 'blob))")))
+      '(("blob" . "(eval (liaison-get-resource-url 'blob))")))
 #+end_src
 
 We can now call the =blob= macro in an Org document and it will expand
@@ -90,7 +90,7 @@ To view this document in its raw format, follow this link: {{{blob}}}.
 
 Read the [[Publishing your website][Publishing your website]] section for more information.
 
-** Using Forgecast in your preamble/postamble
+** Using Liaison in your preamble/postamble
 
 In your publishing script, you will want to redefine the
 =org-html-format-spec= function such as to extend it with your custom
@@ -102,12 +102,12 @@ or =%e=, don't forget to add them, otherwise they won't be expanded.
 #+begin_src emacs-lisp
 (defun org-html-format-spec (info)
   "Return format specification for preamble and postamble."
-  `((?b . ,(forgecast-get-resource-url 'blob))
-    (?m . ,(forgecast-get-resource-url 'blame))
-    (?t . ,(forgecast-get-resource-url 'tree))
-    (?l . ,(forgecast-get-resource-url 'log))
-    (?p . ,(forgecast-get-resource-url 'plain))
-    (?e . ,(forgecast-get-resource-url 'edit))))
+  `((?b . ,(liaison-get-resource-url 'blob))
+    (?m . ,(liaison-get-resource-url 'blame))
+    (?t . ,(liaison-get-resource-url 'tree))
+    (?l . ,(liaison-get-resource-url 'log))
+    (?p . ,(liaison-get-resource-url 'plain))
+    (?e . ,(liaison-get-resource-url 'edit))))
 #+end_src
 
 This next step involves preparing your project structure to support
@@ -163,7 +163,7 @@ component.
 	       :components "articles"))))
 #+end_src
 
-Your website is now properly configured to use Forgecast.
+Your website is now properly configured to use Liaison.
 
 Read the [[Publishing your website][Publishing your website]] section for more information.
 

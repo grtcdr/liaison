@@ -1,7 +1,7 @@
-#+TITLE: Forgecast
-#+DESCRIPTION: Forgecast generalizes and automates the process of linking an HTML document to its corresponding source document originally written in the Org markup language.
+#+TITLE: Liaison
+#+DESCRIPTION: Liaison generalizes and automates the process of linking an HTML document to its corresponding source document originally written in the Org markup language.
 
-Forgecast generalizes and automates the process of linking an HTML
+Liaison generalizes and automates the process of linking an HTML
 document to its corresponding source document originally written in
 the Org markup language.
 

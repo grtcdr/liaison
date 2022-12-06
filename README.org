@@ -1,14 +1,21 @@
-#+TITLE: Forgecast
+#+TITLE: Liaison
 
-Forgecast generalizes and automates the process of linking an /HTML/
-document to its corresponding source document originally written in
-the /Org/ markup language. Forgecast generates URLs that point to a
-specific page in a Git web interface, e.g. the tree view, the blob,
-the blame or edit page, etc.
+Liaison, [[https://github.com/grtcdr/forgecast/issues/4][originally named "Forgecast"]], generalizes and automates the
+process of linking an /HTML/ document to its corresponding source
+document originally written in the /Org/ markup language.
+
+Just as a repository doesn't necessarily have to link to the content
+to whom it is the source, neither does the content. But, this
+disconnect inevitably hurts accessibility and leads to a sort of
+inventiveness in areas where the fruits of the inventiveness are
+already being savoured.
+
+Liaison generates URLs that point to a specific page in a Git web
+interface, e.g. the tree view, the blob, the blame or edit page, etc.
 
 /How does it work?/
 
-Check out [[https://grtcdr.tn/forgecast][the project's website]] to get a feel for what the package can
+Check out [[https://grtcdr.tn/liaison][the project's website]] to get a feel for what the package can
 do.
 
 /Who is it for?/
@@ -29,37 +36,37 @@ See the [[#custom-instances][Custom instances]] section for more information.
 
 * Installation
 
-Find and navigate to a project you wish to extend with Forgecast's
+Find and navigate to a project you wish to extend with Liaison's
 capabilities.
 
 Now, clone the project:
 
 #+begin_src sh
-git clone https://github.com/grtcdr/forgecast.git
+git clone https://github.com/grtcdr/liaison.git
 #+end_src
 
 Likewise, you may choose to add it as a submodule:
 
 #+begin_src sh
-git submodule add https://github.com/grtcdr/forgecast.git
+git submodule add https://github.com/grtcdr/liaison.git
 #+end_src
 
 * Usage
 
-Forgecast is an extension of [[https://orgmode.org/manual/Publishing.html][Org Mode's publishing feature]] and should
+Liaison is an extension of [[https://orgmode.org/manual/Publishing.html][Org Mode's publishing feature]] and should
 therefore be called from a publishing script, i.e. your project
 specification.
 
 - For a minimal working example, check out the source code of this
   [[file:doc/site/][project's website]].
-- For something more guided, read the [[https://grtcdr.tn/forgecast/doc/forgecast.html][online manual]].
+- For something more guided, read the [[https://grtcdr.tn/liaison/doc/manual/liaison.html][online manual]].
 
 * Custom instances
 :PROPERTIES:
 :CUSTOM_ID: custom-instances
 :END:
 
-Forgecast by default doesn't recognize domains beside the presets, so
+Liaison by default doesn't recognize domains beside the presets, so
 you'll have to specify the domain of your forge and its associated
 resource URL builder.
 
@@ -68,11 +75,11 @@ projects are present in the GitLab instance provided by your
 organization.
 
 To add support for your infrastructure, you need to customize the
-=forgecast-forge-alist= variable, here's an example:
+=liaison-forge-alist= variable, here's an example:
 
 #+begin_src emacs-lisp
-(defvar forgecast-forge-alist
-  '(("gitlab.freedesktop.org" . #'forgecast--build-gitlab-resource-url)))
+(defvar liaison-forge-alist
+  '(("gitlab.freedesktop.org" . #'liaison--build-gitlab-resource-url)))
 #+end_src
 
 You should now be comfortable with the way this library works, enough
