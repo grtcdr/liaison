@@ -59,7 +59,7 @@ specification.
 
 - For a minimal working example, check out the source code of this
   [[file:doc/site/][project's website]].
-- For something more guided, read the [[https://grtcdr.tn/liaison/doc/manual/liaison.html][online manual]].
+- For something more guided, read the [[https://grtcdr.tn/liaison/manual/liaison.html][online manual]].
 
 * Custom instances
 :PROPERTIES:
