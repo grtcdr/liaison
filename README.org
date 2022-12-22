@@ -4,14 +4,11 @@ Liaison, [[https://github.com/grtcdr/forgecast/issues/4][originally named "Forge
 process of linking an /HTML/ document to its corresponding source
 document originally written in the /Org/ markup language.
 
-Just as a repository doesn't necessarily have to link to the content
-to whom it is the source, neither does the content. But, this
-disconnect inevitably hurts accessibility and leads to a sort of
-inventiveness in areas where the fruits of the inventiveness are
-already being savoured.
-
 Liaison generates URLs that point to a specific page in a Git web
-interface, e.g. the tree view, the blob, the blame or edit page, etc.
+interface, e.g. the tree, blob, blame, edit pages, and more.
+
+For more information on how to use and integrate the package into your
+project, you are encouraged to read the [[https://grtcdr.tn/liaison/manual/liaison.html][online manual]].
 
 /How does it work?/
 
@@ -31,56 +28,3 @@ library.
 - SourceHut (and custom instances)
 - Gitea (and custom instances)
 - cgit instances
-
-See the [[#custom-instances][Custom instances]] section for more information.
-
-* Installation
-
-Find and navigate to a project you wish to extend with Liaison's
-capabilities.
-
-Now, clone the project:
-
-#+begin_src sh
-git clone https://github.com/grtcdr/liaison.git
-#+end_src
-
-Likewise, you may choose to add it as a submodule:
-
-#+begin_src sh
-git submodule add https://github.com/grtcdr/liaison.git
-#+end_src
-
-* Usage
-
-Liaison is an extension of [[https://orgmode.org/manual/Publishing.html][Org Mode's publishing feature]] and should
-therefore be called from a publishing script, i.e. your project
-specification.
-
-- For a minimal working example, check out the source code of this
-  [[file:doc/site/][project's website]].
-- For something more guided, read the [[https://grtcdr.tn/liaison/manual/liaison.html][online manual]].
-
-* Custom instances
-:PROPERTIES:
-:CUSTOM_ID: custom-instances
-:END:
-
-Liaison by default doesn't recognize domains beside the presets, so
-you'll have to specify the domain of your forge and its associated
-resource URL builder.
-
-Now, suppose you're a member of [[https://www.freedesktop.org/wiki/][freedesktop.org]], your wonderful
-projects are present in the GitLab instance provided by your
-organization.
-
-To add support for your infrastructure, you need to customize the
-=liaison-forge-alist= variable, here's an example:
-
-#+begin_src emacs-lisp
-(defvar liaison-forge-alist
-  '(("gitlab.freedesktop.org" . #'liaison--build-gitlab-resource-url)))
-#+end_src
-
-You should now be comfortable with the way this library works, enough
-to make it work for whatever forges you're currently using.

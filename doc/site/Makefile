@@ -7,5 +7,5 @@ serve: build
 	@miniserve public --route-prefix=liaison --index=index.html
 
 clean:
-	@rm -rvf "public/"
-	@rm -rvf ".cache/"
+	@rm -rvf public
+	@rm -rvf .cache

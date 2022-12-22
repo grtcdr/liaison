@@ -39,10 +39,19 @@ shell prompt:
 git clone https://github.com/grtcdr/liaison.git
 #+end_src
 
-It is assumed that you have a publishing script where you define your
-project specification and other configuration variables which affect
-how your website is built, you can name this file =publish.el= and
-execute it from a =Makefile=.
+Likewise, you may choose to add it as a submodule:
+
+#+begin_src sh
+git submodule add https://github.com/grtcdr/liaison.git
+#+end_src
+
+It is assumed that you have a publishing script which this manual has
+chosen to name =publish.el=; within this file, you should define the
+project specification as well as any other configuration variables or
+special functions that affect the output of the published website.
+
+It is best that you initiate the publishing process using a
+=Makefile=.
 
 In your publishing script, add the package to the =load-path= and then
 require it like so:
@@ -51,8 +60,6 @@ require it like so:
 (add-to-list 'load-path "liaison")
 (require 'liaison)
 #+end_src
-
-You're all set.
 
 * Integration
 
@@ -177,4 +184,22 @@ The build system should load the publishing script before calling the
 emacs --quick --batch \
       --load publish.el \
       --funcall org-publish-all t t
+#+end_src
+
+* Custom instances
+
+Liaison by default doesn't recognize domains beside the presets, so
+you'll have to specify the domain of your forge and its associated
+resource URL builder.
+
+Now, suppose you're a member of [[https://www.freedesktop.org/wiki/][freedesktop.org]], your wonderful
+projects are present in the GitLab instance provided by your
+organization.
+
+To add support for your infrastructure, you need to customize the
+=liaison-forge-alist= variable, here's an example:
+
+#+begin_src emacs-lisp
+(defvar liaison-forge-alist
+  '(("gitlab.freedesktop.org" . #'liaison--build-gitlab-resource-url)))
 #+end_src

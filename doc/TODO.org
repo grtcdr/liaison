@@ -23,7 +23,7 @@ I believe this feature should be implemented in a separate package.
 ** Add more functionalities [1/1]                                :sourcehut:
 *** DONE Generate a URL for the "blame" page of a document
 * Documentation
-** DOING Write up a Texinfo manual
+** DONE Write up a Texinfo manual
 ** DONE Include a minimal reproducible example
 ** SCRATCHED Include a video demonstration of real-world example
 * Bugs
