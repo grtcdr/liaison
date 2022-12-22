@@ -2,7 +2,7 @@
 #+AUTHOR:               Aziz Ben Ali
 #+EMAIL:                tahaaziz.benali@esprit.tn
 #+LANGUAGE:             en
-#+MACRO:                version 0.2.0
+#+MACRO:                version 0.3.0
 #+MACRO:                release-date 2022-11-13
 #+TEXINFO_FILENAME:     liaison.info
 #+TEXINFO_DIR_TITLE:    Org Mode publishing to automate linking pages to their sources

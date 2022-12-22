@@ -38,7 +38,6 @@ relationship of REL."
 
 (defvar site/html-head
   (concat
-   (shr-dom-to-xml '(base ((href . "/liaison/"))))
    (site/link "stylesheet" "https://grtcdr.tn/css/common.css")
    (site/link "stylesheet" "https://grtcdr.tn/css/heading.css")
    (site/link "stylesheet" "https://grtcdr.tn/css/source.css")
@@ -59,26 +58,23 @@ relationship of REL."
     (?e . ,(liaison-get-resource-url 'edit))))
 
 (defvar main-preamble
-      (shr-dom-to-xml
-       '(nav nil
-	     (ul nil
-		 (li nil
-		     (a ((href . "https://grtcdr.tn"))
-			"grtcdr.tn"))
-		 (li nil
-		     (a ((href . "index.html")) "liaison"))
-		 (li nil
-		     (a ((href . "manual/liaison.html"))
-			"manual"))
-		 (li nil
-		     (a ((href . "CHANGELOG.html"))
-			"changelog"))
-		 (li nil
-		     (a ((href . "TODO.html"))
-			"to-dos"))
-		 (li nil
-		     (a ((href . "https://github.com/grtcdr/liaison"))
-			"github")))))
+  (shr-dom-to-xml
+   '(nav nil
+	 (ul nil
+	     (li nil
+		 (a ((href . "/liaison/index.html")) "liaison"))
+	     (li nil
+		 (a ((href . "/liaison/manual/liaison.html"))
+		    "manual"))
+	     (li nil
+		 (a ((href . "/liaison/CHANGELOG.html"))
+		    "changelog"))
+	     (li nil
+		 (a ((href . "/liaison/TODO.html"))
+		    "to-dos"))
+	     (li nil
+		 (a ((href . "https://github.com/grtcdr/liaison"))
+		    "github")))))
       "Define an HTML snippet/template used as a preamble across all
 projects.")
 
