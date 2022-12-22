@@ -96,8 +96,6 @@ to the string we assigned to it.
 To view this document in its raw format, follow this link: {{{blob}}}.
 #+end_src
 
-Read the [[Publishing your website][Publishing your website]] section for more information.
-
 ** Using Liaison in your preamble/postamble
 
 In your publishing script, you will want to redefine the
@@ -126,7 +124,7 @@ format strings defined in the =org-html-format-spec= function.
 The following is an example of such a template:
 
 #+begin_src html
-<nav style="text-align:center">
+<nav>
   <a href="%e"><button>Edit</button></a>
   <a href="%m"><button>Blame</button></a>
   <a href="%b"><button>Blob</button></a>
@@ -173,12 +171,11 @@ component.
 
 Your website is now properly configured to use Liaison.
 
-Read the [[Publishing your website][Publishing your website]] section for more information.
-
 ** Publishing your website
 
-The build system should load the publishing script before calling the
-=org-publish-project= function, and that should look something like:
+The publishing script should be loaded before the
+=org-publish-project= function is called, this translates to the
+following command:
 
 #+begin_src sh
 emacs --quick --batch \
