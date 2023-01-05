@@ -39,15 +39,19 @@
 build their resource URLs.")
 
 (defun liaison--forge-function (forge)
+  "Return the function associated with a given FORGE."
   (alist-get forge liaison-forge-alist nil nil #'string=))
 
 (defun liaison--git-remote-to-https (remote)
+  "Translate a Git remote to HTTPS."
   (string-replace
    "git@"
    "https://"
    (car (split-string remote ":"))))
 
 (defun liaison--assoc-forge (remote)
+  "Return the general (symbolic) forge name which the REMOTE is likely to
+belong to."
   (let ((forge nil))
     (dolist (f liaison-forge-alist)
       (when (string-prefix-p
@@ -60,9 +64,11 @@ build their resource URLs.")
     forge))
 
 (defun liaison--get-branch ()
+  "Return the name of the current branch."
   (car (vc-git-branches)))
 
 (defun liaison--get-remote ()
+  "Return the URL of this repository."
   (vc-git-repository-url
    (buffer-file-name) nil))
 
