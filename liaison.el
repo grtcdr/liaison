@@ -60,7 +60,7 @@ build their resource URLs.")
     forge))
 
 (defun liaison--get-branch ()
-  (let ((branch (vc-git--rev-parse "@{push}")))
+  (let ((branch (vc-git--rev-parse "HEAD")))
     (unless (null branch)
       (vc-git--symbolic-ref branch))))
 
