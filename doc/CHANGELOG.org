@@ -4,6 +4,13 @@ This document tracks the changes of this package throughout time (in
 chronological order) and in between releases. Note that the changes
 listed here are not exhaustive.
 
+* 0.4.0
+
++ Use =vc-git-branches= instead of manually resolving the current branch (fixes [[https://github.com/grtcdr/liaison/issues/5][#5]])
++ Document private functions
++ Correct the links found throughout the website
++ Clean up the README
+
 * 0.3.0
 
 + =forgecast-get-resource-url=: Do no trim the return value of
