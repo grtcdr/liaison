@@ -2,11 +2,10 @@
 #+AUTHOR:               Aziz Ben Ali
 #+EMAIL:                tahaaziz.benali@esprit.tn
 #+LANGUAGE:             en
-#+MACRO:                version 0.3.0
-#+MACRO:                release-date 2022-11-13
+#+MACRO:                version 0.4.0
+#+MACRO:                release-date 2023-01-06
 #+TEXINFO_FILENAME:     liaison.info
-#+TEXINFO_DIR_TITLE:    Org Mode publishing to automate linking pages to their sources
-#+TEXINFO_DIR_CATEGORY: Org Mode publishing extension
+#+TEXINFO_DIR_TITLE:    Automate linking documents back to their sources
 
 This manual is a reference guide for Liaison {{{version}}}, first
 released on {{{release-date}}}.
