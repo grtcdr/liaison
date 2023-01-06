@@ -50,8 +50,7 @@ build their resource URLs.")
    (car (split-string remote ":"))))
 
 (defun liaison--assoc-forge (remote)
-  "Return the general (symbolic) forge name which the REMOTE is likely to
-belong to."
+  "Return the forge which REMOTE is likely to belong to."
   (let ((forge nil))
     (dolist (f liaison-forge-alist)
       (when (string-prefix-p
