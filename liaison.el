@@ -68,16 +68,13 @@ build their resource URLs.")
 
 (defun liaison--get-remote ()
   "Return the URL of this repository."
-  (vc-git-repository-url
-   (buffer-file-name) nil))
+  (vc-git-repository-url (buffer-file-name) nil))
 
 (defun liaison--get-resource-slug ()
   "Determine the slug of the current buffer."
   (let* ((buffer (buffer-file-name))
 	 (root (vc-find-root buffer ".git")))
-    (string-remove-prefix
-     (expand-file-name root)
-     buffer)))
+    (string-remove-prefix (expand-file-name root) buffer)))
 
 (defun liaison-get-resource-url (type)
   "Return the URL of the current resource given the TYPE."
