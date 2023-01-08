@@ -199,3 +199,106 @@ To add support for your infrastructure, you need to customize the
 (defvar liaison-forge-alist
   '(("gitlab.freedesktop.org" . #'liaison--build-gitlab-resource-url)))
 #+end_src
+
+* Edge cases
+
+** Handling sitemaps
+
+In some cases, you may find yourself using Liaison's functions in a
+publishing project with the =:auto-sitemap= option set to ~t~.
+
+Provided you are relying upon a templating system like the one
+proposed in this document, you will notice that when you visit the
+sitemap (e.g. =https://example.com/blog/sitemap.html=) in a web
+browser, the document will contain the same preamble/postamble as the
+files which it is indexing.
+
+To get around this, you should use set the =:sitemap-function=
+option. Here's an example in which we hide the postamble from
+appearing in the sitemap:
+
+#+begin_src elisp
+(defun my/blog-sitemap-function (title list)
+  "Custom site map function for the blog project."
+  (concat "#+OPTIONS: html-postamble:nil\n"
+	  (org-publish-sitemap-default title list)))
+#+end_src
+
+Here's another example which references a setupfile:
+
+#+begin_src elisp
+(defun my/blog-sitemap-function (title list)
+  "Custom site map function for the blog project."
+  (concat "#+SETUPFILE: setup.org\n"
+	  (org-publish-sitemap-default title list)))
+#+end_src
+
+By now you will have noticed that the strings we're concatenating to
+the default sitemap function, i.e. =org-publish-sitemap-default=,
+follow the same syntax as any Org document.
+
+The result of this endeavor is a persistent configuration of the
+project's sitemap with our own custom options.
+
+** Handling submodules
+
+Git submodules are by default in a detached =HEAD= state, meaning that
+=HEAD= will always point to a specific commit (usually the most
+recent), rather than the usual, i.e. a specific branch.
+
+This causes severe problems to the generation of URLs. Instead of
+receiving a working URL such as the following:
+
+#+begin_example
+https://github.com/grtcdr/forgecast/commits/main/liaison.el
+#+end_example
+
+You'll instead receive a URL like this:
+
+#+begin_example
+https://github.com/grtcdr/forgecast/commits/(HEAD detached at 984d79d)/liaison.el
+#+end_example
+
+This URL is not understood by GitHub, or any other web interface for
+that matter. To get around this, one must =checkout= a specific branch
+(usually the default) immediately after pulling the contents of the
+submodule.
+
+*** Within the context of CI/CD
+
+**** GitHub
+
+A workflow such as the following will not suffice on its own:
+
+#+begin_src yaml 
+steps:
+  - name: Checkout repository
+    uses: actions/checkout@v3
+    with:
+      submodules: true
+#+end_src
+
+=actions/checkout@v3= does not, at the time of writing this, offer the
+option to check out a specific branch after pulling the submodules of
+the repository.
+
+A viable workaround is to manually do this step, so let's do it.
+
+#+begin_src yaml
+steps:
+  - name: Checkout repository
+    uses: actions/checkout@v3
+    with:
+      submodules: true
+
+  - name: Attach to default branches of submodules
+    run:
+      # a. If you know that every submodule uses the same name for
+      # their default branch, then using `foreach` will work fine. We
+      # should manually check out the branch and pull any new commits.
+      git submodule foreach 'git checkout main && git pull'
+
+      # b. TODO: If your submodules are using different names for their
+      # default branch, e.g. "master" vs "main" or "x.y.z", then you
+      # should checkout the default branch individually.
+#+end_src
