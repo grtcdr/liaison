@@ -23,7 +23,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Setup GitHub Pages
+      - name: Configure GitHub Pages
         uses: actions/configure-pages@v1
 
       - name: Install Emacs
@@ -36,7 +36,7 @@ jobs:
              cd doc/site
              make
 
-      - name: Upload website blob
+      - name: Upload website
         uses: actions/upload-pages-artifact@v1
         with:
           path: doc/site/public
