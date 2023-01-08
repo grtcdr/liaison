@@ -175,9 +175,9 @@ custom instance. TYPE can be any one of ’log’, ’tree’, ’blob’ or
 	   (slug (if (string-prefix-p "git@" remote)
 		     (cadr (split-string remote ":"))
 		   (string-trim remote (concat "https://" (liaison--assoc-forge remote) "/"))))
+	   (suffix (if (eq type 'blob) "" "item"))
 	   (type (downcase (symbol-name type)))
 	   (branch (liaison--get-branch))
-	   (suffix (if (eq type 'blob) "" "item"))
 	   (resource (liaison--get-resource-slug)))
       (mapconcat 'identity (remove "" (list forge slug type branch suffix resource)) "/"))))
 
