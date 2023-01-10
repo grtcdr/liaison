@@ -196,10 +196,11 @@ custom instance. TYPE can be any one of ’log’, ’tree’, ’blob’ or
 
 (defun liaison-log ()
   "Return a log of the current file."
-  (let* ((vc-fileset (vc-deduce-fileset))
+  (let* ((vc-fileset (ignore-errors (vc-deduce-fileset)))
 	 (backend (car vc-fileset))
 	 (file (cadr vc-fileset)))
-    (liaison--stringify-vc-log backend file)))
+    (unless (not vc-fileset)
+      (liaison--stringify-vc-log backend file))))
 
 (provide 'liaison)
 ;; liaison.el ends here
