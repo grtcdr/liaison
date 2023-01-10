@@ -170,6 +170,19 @@ component.
 
 Your website is now properly configured to use Liaison.
 
+** Inline commit log
+
+If the repository which contains your files is private or you have a
+preference for keeping things separate, then consider using the
+=liaison-log= function as a means of obtaining the inline commit log,
+and embedding that within your documents.
+
+Usually, =liaison-log= returns the commit in fontified form. To
+disable this feature, set the =liaison-fontify-log= variable to =nil=.
+
+Just as in previous sections, you can associate the aforementioned
+function to an Org macro or include it in your preamble/postamble.
+
 ** Publishing your website
 
 The publishing script should be loaded before the
@@ -270,7 +283,7 @@ submodule.
 
 A workflow such as the following will not suffice on its own:
 
-#+begin_src yaml 
+#+begin_src yaml
 steps:
   - name: Checkout repository
     uses: actions/checkout@v3

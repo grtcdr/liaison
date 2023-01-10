@@ -27,6 +27,7 @@
 ;;; Code:
 
 (require 'vc)
+(require 'font-lock)
 
 (defvar liaison-forge-alist
   '(("github.com"                   . #'liaison--build-github-resource-url)
@@ -37,6 +38,9 @@
     ("git.savannah.nongnu.org/cgit" . #'liaison--build-cgit-resource-url))
   "Alist of forges and their corresponding function which is used to
 build their resource URLs.")
+
+(defvar liaison-fontify-log nil
+  "Whether to fontify the log returned by ‘liaison-log’.")
 
 (defun liaison--forge-function (forge)
   "Return the function associated with a given FORGE."
@@ -180,6 +184,22 @@ custom instance. TYPE can be any one of ’log’, ’tree’, ’blob’ or
 	   (branch (liaison--get-branch))
 	   (resource (liaison--get-resource-slug)))
       (mapconcat 'identity (remove "" (list forge slug type branch suffix resource)) "/"))))
+
+(defun liaison--stringify-vc-log (backend files)
+  "Return the output of ‘vc-print-log-internal’ as a string."
+  (save-window-excursion
+    (vc-print-log-internal backend files nil))
+    (with-current-buffer "*vc-change-log*"
+      (unless liaison-fontify-log
+	(font-lock-unfontify-buffer))
+      (buffer-string)))
+
+(defun liaison-log ()
+  "Return a log of the current file."
+  (let* ((vc-fileset (vc-deduce-fileset))
+	 (backend (car vc-fileset))
+	 (file (cadr vc-fileset)))
+    (liaison--stringify-vc-log backend file)))
 
 (provide 'liaison)
 ;; liaison.el ends here

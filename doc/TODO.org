@@ -6,16 +6,19 @@ somewhere external to this repository. A tag immediatelly following
 =:sug:= is the username of the person with the original suggestion.
 
 * Features
+** TODO Resolve detached HEAD state
+
+I wrote a [[file:manual/liaison.org::*Handling submodules][workaround in the manual]] which addresses this issue. We
+should however offer a more sturdy solution to avoid such an issue.
+
 ** DONE Automatically detect branch
 ** DONE Function reusability by inferring all relevant information
+** DONE Inline commit logs                                    :sug:yantar92:
 ** Support more forges [3/3]                                  :sug:yantar92:
 *** DONE Savannah
 *** DONE Codeberg
 *** DONE GitLab
-** Inline commit history macro [0/2]                          :sug:yantar92:
-I believe this feature should be implemented in a separate package.
-*** TODO Retrieve commit history of a file
-*** TODO Implement the macro
+** Inline commit history macro [1/2]
 ** Add more functionalities [3/3]                                   :github:
 *** DONE Generate a URL of the "blame" page of a document
 *** DONE Generate a URL of the "edit" page of a document
