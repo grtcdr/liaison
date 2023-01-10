@@ -188,19 +188,21 @@ custom instance. TYPE can be any one of ’log’, ’tree’, ’blob’ or
 (defun liaison--stringify-vc-log (backend files)
   "Return the output of ‘vc-print-log-internal’ as a string."
   (save-window-excursion
-    (vc-print-log-internal backend files nil))
-    (with-current-buffer "*vc-change-log*"
-      (unless liaison-fontify-log
-	(font-lock-unfontify-buffer))
-      (buffer-string)))
+    (vc-print-log-internal backend (if (listp files) files (list files))
+			   (vc-working-revision files)
+			   vc-log-show-limit nil nil))
+  (with-current-buffer "*vc-change-log*"
+    (unless (not liaison-fontify-log)
+      (font-lock-unfontify-buffer))
+    (buffer-string)))
 
 (defun liaison-log ()
   "Return a log of the current file."
   (let* ((vc-fileset (ignore-errors (vc-deduce-fileset)))
 	 (backend (car vc-fileset))
-	 (file (cadr vc-fileset)))
+	 (files (cadr vc-fileset)))
     (unless (not vc-fileset)
-      (liaison--stringify-vc-log backend file))))
+      (liaison--stringify-vc-log backend files))))
 
 (provide 'liaison)
 ;; liaison.el ends here
