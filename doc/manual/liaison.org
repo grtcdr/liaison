@@ -293,9 +293,12 @@ steps:
 
 =actions/checkout@v3= does not, at the time of writing this, offer the
 option to check out a specific branch after pulling the submodules of
-the repository.
+the repository, so our only option is to do this manually.
 
-A viable workaround is to manually do this step, so let's do it.
+If you're sure that every submodule is using the same name for their
+default branches, =foreach= is the appropriate and most efficient
+function. However, you shouldn't do this unless you're intending to
+integrate Liaison into every submodule.
 
 #+begin_src yaml
 steps:
@@ -304,14 +307,29 @@ steps:
     with:
       submodules: true
 
-  - name: Attach to default branches of submodules
+  - name: [WORKAROUND] Attach to the default branches of submodules
     run:
-      # a. If you know that every submodule uses the same name for
-      # their default branch, then using `foreach` will work fine. We
-      # should manually check out the branch and pull any new commits.
-      git submodule foreach 'git checkout main && git pull'
+      git submodule foreach 'git checkout <default-branch> && git pull'      
+#+end_src
 
-      # b. TODO: If your submodules are using different names for their
-      # default branch, e.g. "master" vs "main" or "x.y.z", then you
-      # should checkout the default branch individually.
+A better alternative is to individually checkout the default branch
+for the specific submodules you're targeting.
+
+This way, if your submodules are using different names for their
+default branch, e.g. "master" vs "main" or "x.y.z", you won't receive
+any errors about an unknown =pathspec=. Additionally, you are
+targeting only the necessary submodules.
+
+#+begin_src yaml
+steps:
+  - name: Checkout repository
+    uses: actions/checkout@v3
+    with:
+      submodules: true
+
+  - name: [WORKAROUND] Attach to the default branches of submodules
+    run: |
+      cd <path/to/submodule>
+      git checkout <default-branch>
+      git pull
 #+end_src

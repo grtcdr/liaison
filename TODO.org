@@ -8,8 +8,8 @@ somewhere external to this repository. A tag immediatelly following
 * Features
 ** TODO Resolve detached HEAD state
 
-I wrote a [[file:manual/liaison.org::*Handling submodules][workaround in the manual]] which addresses this issue. We
-should however offer a more sturdy solution to avoid such an issue.
+I documented a workaround in the manual which addresses this issue. We
+should however offer a more sturdy solution to avoid it altogether.
 
 ** DONE Automatically detect branch
 ** DONE Function reusability by inferring all relevant information

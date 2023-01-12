@@ -24,8 +24,10 @@
 (require 'project)
 (require 'shr)
 
-;; Import the library
+;; Temporarily change the default directory because this website is
+;; nested within the library - it's either this or a symlink.
 (let ((default-directory (project-root (project-current))))
+  ;; Import the library
   (add-to-list 'load-path default-directory)
   (require 'liaison))
 
@@ -38,12 +40,14 @@ relationship of REL."
 
 (defvar site/html-head
   (concat
+   (site/link "stylesheet" "https://grtcdr.tn/css/def.css")
    (site/link "stylesheet" "https://grtcdr.tn/css/common.css")
    (site/link "stylesheet" "https://grtcdr.tn/css/heading.css")
-   (site/link "stylesheet" "https://grtcdr.tn/css/source.css")
-   (site/link "stylesheet" "https://grtcdr.tn/css/table.css")
    (site/link "stylesheet" "https://grtcdr.tn/css/nav.css")
    (site/link "stylesheet" "https://grtcdr.tn/css/org.css")
+   (site/link "stylesheet" "https://grtcdr.tn/css/source.css")
+   (site/link "stylesheet" "https://grtcdr.tn/css/table.css")
+   (site/link "stylesheet" "https://grtcdr.tn/css/figure.css")
    (site/link "icon" "https://grtcdr.tn/assets/favicon.ico"))
   "HTML headers shared across projects.")
 
@@ -57,49 +61,49 @@ relationship of REL."
     (?p . ,(liaison-get-resource-url 'plain))
     (?e . ,(liaison-get-resource-url 'edit))))
 
-(defvar main-preamble
+(defvar site/main-preamble
   (shr-dom-to-xml
    '(nav nil
 	 (ul nil
 	     (li nil
-		 (a ((href . "/liaison/index.html")) "liaison"))
+		 (a ((href . "/liaison/index.html")) "Liaison"))
 	     (li nil
 		 (a ((href . "/liaison/manual/liaison.html"))
-		    "manual"))
+		    "Manual"))
 	     (li nil
 		 (a ((href . "/liaison/CHANGELOG.html"))
-		    "changelog"))
+		    "Changelog"))
 	     (li nil
 		 (a ((href . "/liaison/TODO.html"))
-		    "to-dos"))
+		    "To-dos"))
 	     (li nil
 		 (a ((href . "https://github.com/grtcdr/liaison"))
-		    "github")))))
+		    "Development")))))
       "Define an HTML snippet/template used as a preamble across all
 projects.")
 
-(defvar article-postamble
+(defvar site/article-postamble
   (shr-dom-to-xml
    '(div ((class . "meta"))
 	 (ul nil
 	     (li nil
 		 (a ((href . "%e"))
-		    "edit"))
+		    "Edit"))
 	     (li nil
 		 (a ((href . "%m"))
-		    "blame"))
+		    "Blame"))
 	     (li nil
 		 (a ((href . "%b"))
-		    "blob"))
+		    "Blob"))
 	     (li nil
 		 (a ((href . "%t"))
-		    "tree"))
+		    "Tree"))
 	     (li nil
 		 (a ((href . "%l"))
-		    "log"))
+		    "Log"))
 	     (li nil
 		 (a ((href . "%p"))
-		    "plain")))))
+		    "Plain")))))
   "Define an HTML snippet/template used as a postamble by the
 articles project.")
 
@@ -121,40 +125,33 @@ articles project.")
 ;; Project specification
 (setq org-publish-project-alist
       (list
-       (list "main" ;; This specifies how files at the root of the site get published
+       (list "main" ;; Specify how files at the root of the site get published
 	     :base-extension "org"
 	     :base-directory "src/"
 	     :publishing-directory "public/"
 	     :publishing-function 'org-html-publish-to-html
 	     :html-head (concat site/html-head (site/link "stylesheet" "css/meta.css"))
-	     :html-preamble main-preamble)
-       (list "articles" ;; This specifies how articles get published
+	     :with-toc nil
+	     :section-numbers nil
+	     :html-preamble site/main-preamble)
+       (list "articles" ;; Specify how articles get published
 	     :base-extension "org"
 	     :base-directory "src/articles/"
 	     :publishing-directory "public/articles/"
 	     :publishing-function 'org-html-publish-to-html
 	     :html-divs site/alternate-divs
-	     :html-postamble article-postamble)
-       (list "manual" ;; This specifies how the manual gets published
+	     :html-postamble site/article-postamble)
+       (list "manual" ;; Specify how the manual gets published
 	     :base-extension "org"
 	     :base-directory "../manual/"
 	     :publishing-directory "public/manual/"
 	     :publishing-function 'org-html-publish-to-html
 	     :html-head site/html-head
-	     :html-preamble main-preamble)
-       (list "doc" ;; This specifies how general documentation gets published
-	     :base-extension "org"
-	     :base-directory "../"
-	     :publishing-directory "public/"
-	     :publishing-function 'org-html-publish-to-html
-	     :with-toc nil
-	     :section-numbers nil
-	     :html-head site/html-head
-	     :html-preamble main-preamble)
-       (list "css" ;; This specifies how stylesheets get published
+	     :html-preamble site/main-preamble)
+       (list "css" ;; Specify how stylesheets get published
 	     :base-extension "css"
 	     :base-directory "src/css"
 	     :publishing-directory "public/css/"
 	     :publishing-function 'org-publish-attachment)
-       (list "all" ;; This combines all the previous projects
-	     :components '("articles" "doc" "manual" "main" "css"))))
+       (list "all" ;; Combine every publishing project
+	     :components '("articles" "manual" "main" "css"))))

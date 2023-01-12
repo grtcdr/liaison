@@ -6,17 +6,22 @@
 
 .meta > ul li {
   display: inline-block;
+  user-select: none;
   font-weight: 300;
   text-transform: uppercase;
 }
 
 .meta > ul li+li:before {
   content: '|';
-  color: #5F5F5F;
+  color: var(--bg02);
   padding: 0 1.1em;
 }
 
 .meta ul li > a {
   text-decoration: none;
-  color: #607EAA;
+  color: var(--blue);
+}
+
+.meta ul li > a:hover {
+  background-color: var(--bg02);
 }
