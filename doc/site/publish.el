@@ -31,24 +31,25 @@
   (add-to-list 'load-path default-directory)
   (require 'liaison))
 
-(defun site/link (rel href)
-  "Format as a ’link’ tag, a resource located at HREF with a
-relationship of REL."
+(defun site/stylesheet (href)
+  "Format a stylesheet with location HREF."
   (shr-dom-to-xml
-   `(link ((rel . ,rel)
+   `(link ((rel . "stylesheet")
 	   (href . ,href)))))
 
 (defvar site/html-head
   (concat
-   (site/link "stylesheet" "https://grtcdr.tn/css/def.css")
-   (site/link "stylesheet" "https://grtcdr.tn/css/common.css")
-   (site/link "stylesheet" "https://grtcdr.tn/css/heading.css")
-   (site/link "stylesheet" "https://grtcdr.tn/css/nav.css")
-   (site/link "stylesheet" "https://grtcdr.tn/css/org.css")
-   (site/link "stylesheet" "https://grtcdr.tn/css/source.css")
-   (site/link "stylesheet" "https://grtcdr.tn/css/table.css")
-   (site/link "stylesheet" "https://grtcdr.tn/css/figure.css")
-   (site/link "icon" "https://grtcdr.tn/assets/favicon.ico"))
+   (site/stylesheet "https://grtcdr.tn/css/def.css")
+   (site/stylesheet "https://grtcdr.tn/css/common.css")
+   (site/stylesheet "https://grtcdr.tn/css/heading.css")
+   (site/stylesheet "https://grtcdr.tn/css/nav.css")
+   (site/stylesheet "https://grtcdr.tn/css/org.css")
+   (site/stylesheet "https://grtcdr.tn/css/source.css")
+   (site/stylesheet "https://grtcdr.tn/css/table.css")
+   (site/stylesheet "https://grtcdr.tn/css/figure.css")
+   (shr-dom-to-xml '(link ((rel . "icon")
+			   (type . "image/x-icon")
+			   (href . "https://grtcdr.tn/assets/favicon.ico")))))
   "HTML headers shared across projects.")
 
 ;; Redefinition of built-in function
@@ -130,7 +131,7 @@ articles project.")
 	     :base-directory "src/"
 	     :publishing-directory "public/"
 	     :publishing-function 'org-html-publish-to-html
-	     :html-head (concat site/html-head (site/link "stylesheet" "css/meta.css"))
+	     :html-head (concat site/html-head (site/stylesheet "css/meta.css"))
 	     :with-toc nil
 	     :section-numbers nil
 	     :html-preamble site/main-preamble)
