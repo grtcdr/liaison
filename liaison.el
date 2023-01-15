@@ -185,22 +185,5 @@ custom instance. TYPE can be any one of ’log’, ’tree’, ’blob’ or
 	   (resource (liaison--get-resource-slug (buffer-file-name))))
       (mapconcat 'identity (remove "" (list forge slug type branch suffix resource)) "/"))))
 
-(defun liaison--vc-log-string (backend files)
-  "Return the output of ‘vc-print-log-internal’ as a string."
-  (vc-print-log-internal backend files
-			 (vc-working-revision (car files)))
-  (with-current-buffer "*vc-change-log*"
-    (if liaison-fontify-log
-	(buffer-string)
-      (buffer-substring-no-properties (point-min) (point-max)))))
-
-(defun liaison-log ()
-  "Return a log of the current file."
-  (let* ((fileset (ignore-errors (vc-deduce-fileset)))
-	 (backend (car fileset))
-	 (files (cadr fileset)))
-    (unless (not fileset)
-      (liaison--vc-log-string backend files))))
-
 (provide 'liaison)
 ;; liaison.el ends here
