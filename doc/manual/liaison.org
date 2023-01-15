@@ -74,7 +74,7 @@ depend on, in your publishing script.
 (require 'ox-publish)
 #+end_src
 
-** Using Liaison as a macro
+** Using macros
 
 This example registers a new =blob= macro which will receive the URL
 to the blob page of the currently visited document.
@@ -95,7 +95,7 @@ to the string we assigned to it.
 To view this document in its raw format, follow this link: {{{blob}}}.
 #+end_src
 
-** Using Liaison in your preamble/postamble
+** In the preamble/postamble
 
 In your publishing script, you will want to redefine the
 =org-html-format-spec= function such as to extend it with your custom

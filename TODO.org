@@ -25,4 +25,4 @@ somewhere external to this repository. A tag immediatelly following
 ** TODO Resolve edge case involving a detached HEAD state
 I documented a workaround in the manual which addresses this issue. We
 should however offer a more sturdy solution to avoid it altogether.
-** TODO Inline commit logs returning empty string                     :help:
+** DONE Inline commit logs returning empty string                     :help:

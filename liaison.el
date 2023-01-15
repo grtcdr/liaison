@@ -70,19 +70,19 @@ build their resource URLs.")
   "Return the name of the current branch."
   (car (vc-git-branches)))
 
-(defun liaison--get-remote ()
+(defun liaison--get-remote (buffer)
   "Return the URL of this repository."
-  (vc-git-repository-url (buffer-file-name) nil))
+  (vc-git-repository-url buffer nil))
 
-(defun liaison--get-resource-slug ()
-  "Determine the slug of the current buffer."
-  (let* ((buffer (buffer-file-name))
-	 (root (vc-find-root buffer ".git")))
-    (string-remove-prefix (expand-file-name root) buffer)))
+(defun liaison--get-resource-slug (buffer)
+  "Determine the slug of BUFFER."
+  (string-remove-prefix
+   (expand-file-name (vc-find-root buffer ".git"))
+   buffer))
 
 (defun liaison-get-resource-url (type)
-  "Return the URL of the current resource given the TYPE."
-  (let* ((remote (liaison--get-remote))
+  "Return the URL of BUFFER with the specified TYPE."
+  (let* ((remote (liaison--get-remote (buffer-file-name)))
 	 (forge (liaison--assoc-forge remote)))
     (funcall (eval (liaison--forge-function forge)) remote type)))
 
@@ -97,7 +97,7 @@ instance. TYPE can be one of ’log’, ’tree’ or ’blob’."
 		    ((eq type 'tree) "src")
 		    ((eq type 'blob) "plain")))
        (?b . ,(liaison--get-branch))
-       (?r . ,(liaison--get-resource-slug))))))
+       (?r . ,(liaison--get-resource-slug (buffer-file-name)))))))
 
 (defun liaison--build-gitea-resource-url (remote type)
   "Return the URL representing a resource hosted on Gitea or a
@@ -117,7 +117,7 @@ custom instance. TYPE can be one of ’log’, ’tree', ’blob’, or
 		    ((eq type 'blob) "raw")
 		    ((eq type 'blame) "blame")))
        (?b . ,(liaison--get-branch))
-       (?r . ,(liaison--get-resource-slug))))))
+       (?r . ,(liaison--get-resource-slug (buffer-file-name)))))))
 
 (defun liaison--build-github-resource-url (remote type)
   "Return the URL representing a resource hosted on
@@ -128,7 +128,7 @@ GitHub. TYPE can be one of ’log’, ’edit’, ’blob’, ’plain’,
 		      "https://raw.githubusercontent.com"
 		    (concat "https://" (liaison--assoc-forge remote))))
 	   (branch (liaison--get-branch))
-	   (resource (liaison--get-resource-slug))
+	   (resource (liaison--get-resource-slug (buffer-file-name)))
 	   (slug (if (string-prefix-p "git@" remote)
 		     (string-trim (cadr (split-string remote ":")) nil ".git")
 		   (string-trim remote
@@ -165,7 +165,7 @@ custom instance. TYPE can be any one of ’log’, ’tree’, ’blob’ or
 	   (plain-query-string (unless (not (eq type 'plain))
 				 "?plain=1"))
 	   (?b (liaison--get-branch))
-	   (?r (liaison--get-resource-slug)))
+	   (?r (liaison--get-resource-slug (buffer-file-name))))
       (concat
        (mapconcat 'identity (remove "" (list forge slug "-" type branch resource)) "/")
        plain-query-string))))
@@ -182,27 +182,25 @@ custom instance. TYPE can be any one of ’log’, ’tree’, ’blob’ or
 	   (suffix (if (eq type 'blob) "" "item"))
 	   (type (downcase (symbol-name type)))
 	   (branch (liaison--get-branch))
-	   (resource (liaison--get-resource-slug)))
+	   (resource (liaison--get-resource-slug (buffer-file-name))))
       (mapconcat 'identity (remove "" (list forge slug type branch suffix resource)) "/"))))
 
-(defun liaison--stringify-vc-log (backend files)
+(defun liaison--vc-log-string (backend files)
   "Return the output of ‘vc-print-log-internal’ as a string."
-  (save-window-excursion
-    (vc-print-log-internal backend files
-			   (vc-working-revision (car files))
-			   nil vc-log-show-limit nil))
+  (vc-print-log-internal backend files
+			 (vc-working-revision (car files)))
   (with-current-buffer "*vc-change-log*"
-    (unless liaison-fontify-log
-      (font-lock-unfontify-buffer))
-    (buffer-string)))
+    (if liaison-fontify-log
+	(buffer-string)
+      (buffer-substring-no-properties (point-min) (point-max)))))
 
 (defun liaison-log ()
   "Return a log of the current file."
-  (let* ((vc-fileset (ignore-errors (vc-deduce-fileset)))
-	 (backend (car vc-fileset))
-	 (files (cadr vc-fileset)))
-    (unless (not vc-fileset)
-      (liaison--stringify-vc-log backend files))))
+  (let* ((fileset (ignore-errors (vc-deduce-fileset)))
+	 (backend (car fileset))
+	 (files (cadr fileset)))
+    (unless (not fileset)
+      (liaison--vc-log-string backend files))))
 
 (provide 'liaison)
 ;; liaison.el ends here
