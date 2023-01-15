@@ -6,8 +6,8 @@ the /Org/ markup language. Liaison generates URLs that point to a
 specific page in a Git web interface, e.g. the tree, blob, blame, edit
 pages, and more.
 
-For more information on how to use and integrate the package into your
-project, you are encouraged to read the [[https://grtcdr.tn/liaison/manual/liaison.html][online manual]].
+For more information on how to install and integrate the package into
+your project, you are encouraged to read the [[https://grtcdr.tn/liaison/manual/liaison.html][online manual]].
 
 * How does it work?
 

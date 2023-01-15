@@ -14,9 +14,9 @@ somewhere external to this repository. A tag immediatelly following
 ** DONE Function reusability by inferring all relevant information
 ** DONE Inline commit logs                                    :sug:yantar92:
 ** Support more forges [3/3]                                  :sug:yantar92:
-*** DONE Savannah
-*** DONE Codeberg
-*** DONE GitLab
+*** DONE Savannah (and custom instances)
+*** DONE Gitea (and custom instances)
+*** DONE GitLab (and custom instances)
 * Documentation
 ** DONE Write up a Texinfo manual
 ** DONE Include a minimal reproducible example
