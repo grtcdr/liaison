@@ -34,7 +34,8 @@
    '(nav nil
 	 (ul nil
 	     (li nil
-		 (a ((href . "/liaison/index.html")) "Liaison"))
+		 (a ((href . "/liaison/index.html"))
+		    "Home"))
 	     (li nil
 		 (a ((href . "/liaison/CHANGELOG.html"))
 		    "Changelog"))
