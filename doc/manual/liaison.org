@@ -1,11 +1,20 @@
-#+TITLE:                Liaison
-#+AUTHOR:               Aziz Ben Ali
-#+EMAIL:                tahaaziz.benali@esprit.tn
-#+LANGUAGE:             en
-#+MACRO:                version 0.4.0
-#+MACRO:                release-date 2023-01-06
-#+TEXINFO_FILENAME:     liaison.info
-#+TEXINFO_DIR_TITLE:    Automate linking documents back to their sources
+#+title:                Liaison
+#+author:               Aziz Ben Ali
+#+email:                tahaaziz.benali@esprit.tn
+#+language:             en
+#+macro:                version 0.4.0
+#+macro:                release-date 2023-01-06
+#+texinfo_filename:     liaison.info
+#+texinfo_dir_title:    Automate linking documents back to their sources
+#+export_file_name:     manual.html
+#+latex_class:          article
+#+latex_class_options:  [12pt, a4paper]
+#+latex_header_extra:   \usepackage{parskip}
+#+latex_header_extra:   \usepackage{listings}
+#+latex_header_extra:   \usepackage[utf8]{inputenc}
+#+latex_header:         \usepackage[margin=3cm]{geometry}
+#+latex_header_extra:   \setlength{\parindent}{0pt}
+#+latex_header_extra:   \setlength{\parskip}{0.5em}
 
 This manual is a reference guide for Liaison {{{version}}}, first
 released on {{{release-date}}}.
@@ -169,19 +178,6 @@ component.
 #+end_src
 
 Your website is now properly configured to use Liaison.
-
-** Inline commit log
-
-If the repository which contains your files is private or you have a
-preference for keeping things separate, then consider using the
-=liaison-log= function as a means of obtaining the inline commit log,
-and embedding that within your documents.
-
-Usually, =liaison-log= returns the commit in fontified form. To
-disable this feature, set the =liaison-fontify-log= variable to =nil=.
-
-Just as in previous sections, you can associate the aforementioned
-function to an Org macro or include it in your preamble/postamble.
 
 ** Publishing your website
 
