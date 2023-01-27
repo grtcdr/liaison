@@ -28,9 +28,17 @@
 
 (require 'shr)
 
-(defun site/main-preamble (_)
+(defalias 'sexp->xml #'shr-dom-to-xml)
+
+(defun templates/stylesheet (href)
+  "Format a stylesheet with location HREF."
+  (sexp->xml
+   `(link ((rel . "stylesheet")
+	   (href . ,href)))))
+
+(defun templates/main-preamble (_)
   "Return HTML template shared among publishing projects."
-  (shr-dom-to-xml
+  (sexp->xml
    '(nav nil
 	 (ul nil
 	     (li nil
@@ -46,9 +54,9 @@
 		 (a ((href . "https://github.com/grtcdr/liaison"))
 		    "Development"))))))
 
-(defun site/article-postamble (_)
-    "Return HTML template used as a postamble by the articles publishing project."
-  (shr-dom-to-xml
+(defun templates/article-postamble (_)
+  "Return HTML template used as a postamble by the articles publishing project."
+  (sexp->xml
    '(div ((class . "meta"))
 	 (ul nil
 	     (li nil
@@ -70,5 +78,20 @@
 		 (a ((href . "%p"))
 		    "Plain"))))))
 
-(provide 'templates)
+(defun templates/html-head ()
+  "HTML headers shared across publishing projects."
+  (concat
+   (templates/stylesheet "https://grtcdr.tn/css/def.css")
+   (templates/stylesheet "https://grtcdr.tn/css/common.css")
+   (templates/stylesheet "https://grtcdr.tn/css/heading.css")
+   (templates/stylesheet "https://grtcdr.tn/css/nav.css")
+   (templates/stylesheet "https://grtcdr.tn/css/org.css")
+   (templates/stylesheet "https://grtcdr.tn/css/source.css")
+   (templates/stylesheet "https://grtcdr.tn/css/table.css")
+   (templates/stylesheet "https://grtcdr.tn/css/figure.css")
+   (sexp->xml '(link ((rel . "icon")
+		      (type . "image/x-icon")
+		      (href . "https://grtcdr.tn/assets/favicon.ico"))))))
+
+(provide 'site/templates)
 ;; templates.el ends here

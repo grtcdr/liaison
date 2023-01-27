@@ -24,11 +24,12 @@
 
 ;;; Code:
 
-(add-to-list 'load-path (concat default-directory "lisp/"))
-
-(require 'templates)
 (require 'ox-publish)
 (require 'project)
+
+;; Load adjacent libraries
+(normal-top-level-add-subdirs-to-load-path)
+(require 'site/templates "templates")
 
 ;; Temporarily change the default directory because this website is
 ;; nested within the library - it's either this or a symlink.
@@ -43,27 +44,6 @@
   (if (string= (getenv "CI") "true")
       (org-latex-publish-to-latex plist filename pub-dir)
     (org-latex-publish-to-pdf plist filename pub-dir)))
-
-(defun site/stylesheet (href)
-  "Format a stylesheet with location HREF."
-  (shr-dom-to-xml
-   `(link ((rel . "stylesheet")
-	   (href . ,href)))))
-
-(defvar site/html-head
-  (concat
-   (site/stylesheet "https://grtcdr.tn/css/def.css")
-   (site/stylesheet "https://grtcdr.tn/css/common.css")
-   (site/stylesheet "https://grtcdr.tn/css/heading.css")
-   (site/stylesheet "https://grtcdr.tn/css/nav.css")
-   (site/stylesheet "https://grtcdr.tn/css/org.css")
-   (site/stylesheet "https://grtcdr.tn/css/source.css")
-   (site/stylesheet "https://grtcdr.tn/css/table.css")
-   (site/stylesheet "https://grtcdr.tn/css/figure.css")
-   (shr-dom-to-xml '(link ((rel . "icon")
-			   (type . "image/x-icon")
-			   (href . "https://grtcdr.tn/assets/favicon.ico")))))
-  "HTML headers shared across projects.")
 
 ;; Redefinition of built-in function
 (defun org-html-format-spec (info)
@@ -105,7 +85,7 @@
 	     :base-directory "src"
 	     :publishing-directory "public"
 	     :publishing-function 'org-html-publish-to-html
-	     :html-head (concat site/html-head (site/stylesheet "css/article.css"))
+	     :html-head (concat (templates/html-head) (templates/stylesheet "css/article.css"))
 	     :with-toc nil
 	     :section-numbers nil
 	     :html-preamble 'site/main-preamble)
@@ -115,7 +95,7 @@
 	     :publishing-directory "public/articles"
 	     :publishing-function 'org-html-publish-to-html
 	     :html-divs site/alternate-divs
-	     :html-postamble 'site/article-postamble)
+	     :html-postamble 'templates/article-postamble)
        (list "manual" ;; Specify how the manual is published
 	     :base-extension "org"
 	     :base-directory "src/"
@@ -124,8 +104,8 @@
 	     :exclude ".*"
 	     :include '("manual.org")
 	     :html-toplevel-hlevel 2
-	     :html-head site/html-head
-	     :html-preamble 'site/main-preamble
+	     :html-head (templates/html-head)
+	     :html-preamble 'templates/main-preamble
 	     :with-email t
 	     :with-author t)
        (list "stylesheets" ;; Specify how stylesheets are published
