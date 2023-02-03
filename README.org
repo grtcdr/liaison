@@ -2,12 +2,12 @@
 
 Liaison generalizes and automates the process of linking an /HTML/
 document to its corresponding source document originally written in
-the /Org/ markup language. Liaison generates URLs that point to a
-specific page in a Git web interface, e.g. the tree, blob, blame, edit
-pages, and more.
+the /Org/ markup language. Its purpose is to generate URLs that point
+to a specific page in a Git web interface, e.g. the tree, blob, blame,
+edit pages, and more.
 
-For more information on how to install and integrate the package into
-your project, you are encouraged to read the [[https://grtcdr.tn/liaison/manual/liaison.html][online manual]].
+For more information on how to install and integrate the package in
+your project, you are encouraged to read the [[https://grtcdr.tn/liaison/manual.html][online manual]].
 
 * How does it work?
 
@@ -25,10 +25,10 @@ Anyone with a blog or documentation website built on top of the
 * What web interfaces does it support?
 
 - GitHub
-- GitLab (and custom instances)
-- SourceHut (and custom instances)
-- Gitea (and custom instances)
-- cgit instances
+- GitLab[fn:1]
+- SourceHut[fn:1]
+- Gitea[fn:1]
+- cgit[fn:1]
 
 * Who's using it?
 
@@ -37,3 +37,7 @@ Anyone with a blog or documentation website built on top of the
 
 If you are using Liaison in your project and would like to be included
 in the list, feel free to [[mailto:tahaaziz.benali@esprit.tn][contact me]].
+
+* Footnotes
+
+[fn:1] Custom instances are supported as well.

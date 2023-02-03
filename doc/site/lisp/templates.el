@@ -1,4 +1,4 @@
-;;; templates.el
+;;; templates.el --- HTML-compatible XML templates  -*- lexical-binding:t -*-
 
 ;; Copyright (C) 2023  Aziz Ben Ali
 
@@ -22,7 +22,7 @@
 
 ;;; Commentary:
 
-;; templates.el provides the XML templates of http://grtcdr.tn/darkman.el.
+;; templates.el provides the HTML-compatible XML templates for https://grtcdr.tn/darkman.el.
 
 ;;; Code:
 
@@ -36,7 +36,7 @@
    `(link ((rel . "stylesheet")
 	   (href . ,href)))))
 
-(defun templates/main-preamble (_)
+(defun templates/main-navbar (_)
   "Return HTML template shared among publishing projects."
   (sexp->xml
    '(nav nil
@@ -54,7 +54,7 @@
 		 (a ((href . "https://github.com/grtcdr/liaison"))
 		    "Development"))))))
 
-(defun templates/article-postamble (_)
+(defun templates/meta-links (_)
   "Return HTML template used as a postamble by the articles publishing project."
   (sexp->xml
    '(div ((class . "meta"))
@@ -78,7 +78,7 @@
 		 (a ((href . "%p"))
 		    "Plain"))))))
 
-(defun templates/html-head ()
+(defun templates/metadata ()
   "HTML headers shared across publishing projects."
   (concat
    (templates/stylesheet "https://grtcdr.tn/css/def.css")
@@ -89,9 +89,10 @@
    (templates/stylesheet "https://grtcdr.tn/css/source.css")
    (templates/stylesheet "https://grtcdr.tn/css/table.css")
    (templates/stylesheet "https://grtcdr.tn/css/figure.css")
-   (sexp->xml '(link ((rel . "icon")
-		      (type . "image/x-icon")
-		      (href . "https://grtcdr.tn/assets/favicon.ico"))))))
+   (sexp->xml
+    '(link ((rel . "icon")
+	    (type . "image/x-icon")
+	    (href . "https://grtcdr.tn/assets/favicon.ico"))))))
 
 (provide 'site/templates)
 ;; templates.el ends here

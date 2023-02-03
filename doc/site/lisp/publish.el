@@ -1,4 +1,4 @@
-;;; publish.el --- A minimal publishing script.
+;;; publish.el --- Publishing script  -*- lexical-binding:t -*-
 
 ;; Copyright (C) 2022 Aziz Ben Ali
 
@@ -24,11 +24,10 @@
 
 ;;; Code:
 
-(require 'ox-publish)
-(require 'project)
+(add-to-list 'load-path (concat default-directory "lisp"))
 
-;; Load adjacent libraries
-(normal-top-level-add-subdirs-to-load-path)
+(require 'project)
+(require 'ox-publish)
 (require 'site/templates "templates")
 
 ;; Temporarily change the default directory because this website is
@@ -48,18 +47,12 @@
 ;; Redefinition of built-in function
 (defun org-html-format-spec (info)
   "Return a list of format strings representing the format specification."
-  `((?b . ,(liaison-get-resource-url 'blob))
+  `((?e . ,(decode-coding-string (liaison-get-resource-url 'edit) 'utf-8))
     (?m . ,(liaison-get-resource-url 'blame))
+    (?b . ,(liaison-get-resource-url 'blob))    
     (?t . ,(liaison-get-resource-url 'tree))
     (?l . ,(liaison-get-resource-url 'log))
-    (?p . ,(liaison-get-resource-url 'plain))
-    (?e . ,(liaison-get-resource-url 'edit))))
-
-(defvar site/alternate-divs
-  '((preamble "div" "_preamble")
-    (content "div" "_content")
-    (postamble "div" "_postamble"))
-  "Defines an alternate div format which avoids duplicate identifiers.")
+    (?p . ,(liaison-get-resource-url 'plain))))
 
 ;; Metadata which appears in the manual
 (setq user-full-name "Aziz Ben Ali"
@@ -80,38 +73,40 @@
 ;; Project specification
 (setq org-publish-project-alist
       (list
-       (list "main" ;; Specify how files at the root of the site is published
+       (list "root" ;; Specify how files at the root of the site is published
 	     :base-extension "org"
 	     :base-directory "src"
 	     :publishing-directory "public"
 	     :publishing-function 'org-html-publish-to-html
-	     :html-head (concat (templates/html-head) (templates/stylesheet "css/article.css"))
+	     :html-head (templates/metadata)
 	     :with-toc nil
 	     :section-numbers nil
-	     :html-preamble 'site/main-preamble)
-       (list "articles" ;; Specify how articles are published
+	     :html-preamble 'templates/main-navbar)
+       (list "examples" ;; Specify how articles are published
 	     :base-extension "org"
-	     :base-directory "src/articles"
-	     :publishing-directory "public/articles"
+	     :base-directory "src/examples"
+	     :publishing-directory "public/examples"
 	     :publishing-function 'org-html-publish-to-html
-	     :html-divs site/alternate-divs
-	     :html-postamble 'templates/article-postamble)
+	     :html-head (concat (templates/metadata)
+				(templates/stylesheet "/liaison/css/article.css"))
+	     :html-preamble 'templates/main-navbar
+	     :html-postamble 'templates/meta-links)
        (list "manual" ;; Specify how the manual is published
 	     :base-extension "org"
-	     :base-directory "src/"
+	     :base-directory "src"
 	     :publishing-directory "public"
 	     :publishing-function 'site/publish-manual
 	     :exclude ".*"
 	     :include '("manual.org")
 	     :html-toplevel-hlevel 2
-	     :html-head (templates/html-head)
-	     :html-preamble 'templates/main-preamble
+	     :html-head (templates/metadata)
+	     :html-preamble 'templates/main-navbar
 	     :with-email t
 	     :with-author t)
        (list "stylesheets" ;; Specify how stylesheets are published
 	     :base-extension "css"
 	     :base-directory "src/css"
-	     :publishing-directory "public/css/"
+	     :publishing-directory "public/css"
 	     :publishing-function 'org-publish-attachment)
-       (list "all" ;; Combine every publishing project
-	     :components '("manual" "articles" "main" "stylesheets"))))
+       (list "all" ;; Combine the publishing projects
+	     :components '("root" "manual" "examples" "stylesheets"))))

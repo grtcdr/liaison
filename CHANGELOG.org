@@ -13,9 +13,9 @@ listed here are not exhaustive.
 
 * 0.3.0
 
-+ =forgecast-get-resource-url=: Do no trim the return value of
-  =forgecast--forge-function= as it may return nil, which causes an
-  error that halts the publishing process.
++ =forgecast-get-resource-url=: Do not trim the return value of
+  =forgecast--forge-function= as it may return nil resulting in an
+  error which halts the publishing process.
 + First efforts in writing a manual for reading within Emacs as well
   as an online resource that can be viewed at
   [[https://grtcdr.tn/liaison/manual/liaison.html]].

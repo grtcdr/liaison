@@ -1,18 +1,15 @@
 #+TITLE: Liaison
 
-Liaison generalizes and automates the process of linking an HTML
+Liaison generalizes and automates the process of linking an /HTML/
 document to its corresponding source document originally written in
-the Org markup language.
+the /Org/ markup language --- its purpose is to generate URLs that
+point to a specific page in a Git web interface, e.g. the tree, blob,
+blame, edit pages and more.
 
-This page serves the purpose of demonstrating the principal
-functionality of this package, which is what generated the URLs you
-find beneath every blog post.
-
-This package, like so many others, provides documentation in a number
-of formats:
-- [[file:manual.org][HTML]] -- to get you started.
-- [[file:manual.pdf][PDF]] -- for when you're on the go.
-- Info -- available in the source tree.
-
-#+INCLUDE: "../public/articles/coffee.html" export html
-#+INCLUDE: "../public/articles/cheese.html" export html
+You should see the provided [[file:examples/cheese.org][example]] that showcases a very simple
+implementation to demonstrate the usefulness of this package. You will
+also find documentation -- to guide you as you navigate this rather
+abstract library -- that's available in a number of formats:
+- [[file:manual.org][HTML]]
+- [[file:manual.pdf][PDF]]
+- Info -- which you can find in the source tree (under the =doc= directory)

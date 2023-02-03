@@ -1,18 +1,23 @@
 #+TITLE: To-dos
 #+TODO: TODO(t) DOING(-) | DONE(d) SCRATCHED(s)
 #+TAGS: sug(s) help(h)
+#+LINK: pull https://github.com/grtcdr/liaison/pull/%s
+#+LINK: issue https://github.com/grtcdr/liaison/issues/%s
+#+LINK: commit https://github.com/grtcdr/liaison/commit/%s
 #+OPTIONS: toc:nil
 #+HTML_HEAD_EXTRA: <link rel="stylesheet" href="https://grtcdr.tn/css/indent.css">
 
 - Items tagged with =sug= are suggestions received from people from
-somewhere external to this repository. A tag immediatelly following
-=:sug:= is the username of the person with the original suggestion.
+  somewhere external to this repository. A tag immediatelly following
+  =:sug:= is the username of the person with the original suggestion.
 - Items tagged with =help= are things we could use your help in
   achieving.
 
 * Features
 ** DONE Function reusability by inferring all relevant information
-** DONE Inline commit logs                                    :sug:yantar92:
+** SCRATCHED Inline commit logs                               :sug:yantar92:
+The implementation (removed in [[commit:6b5b88c78f8dc]]) worked only for
+one or two buffers and would then return =nil= for the rest.
 ** Support more forges [3/3]                                  :sug:yantar92:
 *** DONE Savannah (and custom instances)
 *** DONE Gitea (and custom instances)
