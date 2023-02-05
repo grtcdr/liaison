@@ -1,20 +1,17 @@
-#+title:                Liaison
-#+author:               Aziz Ben Ali
-#+email:                tahaaziz.benali@esprit.tn
-#+language:             en
-#+macro:                version 0.4.0
-#+macro:                release-date 2023-01-06
-#+texinfo_filename:     liaison.info
-#+texinfo_dir_title:    Automate linking documents back to their sources
-#+export_file_name:     manual.html
-#+latex_class:          article
-#+latex_class_options:  [12pt, a4paper]
-#+latex_header_extra:   \usepackage{parskip}
-#+latex_header_extra:   \usepackage{listings}
-#+latex_header_extra:   \usepackage[utf8]{inputenc}
-#+latex_header:         \usepackage[margin=3cm]{geometry}
-#+latex_header_extra:   \setlength{\parindent}{0pt}
-#+latex_header_extra:   \setlength{\parskip}{0.5em}
+#+TITLE:                Liaison
+#+LANGUAGE:             en
+#+MACRO:                version 0.4.0
+#+MACRO:                release-date 2023-01-06
+#+TEXINFO_FILENAME:     liaison.info
+#+TEXINFO_DIR_TITLE:    Automate linking documents back to their sources
+#+LATEX_CLASS:          article
+#+LATEX_CLASS_OPTIONS:  [12pt, a4paper]
+#+LATEX_HEADER_EXTRA:   \usepackage{parskip}
+#+LATEX_HEADER_EXTRA:   \usepackage{listings}
+#+LATEX_HEADER_EXTRA:   \usepackage[utf8]{inputenc}
+#+LATEX_HEADER:         \usepackage[margin=3cm]{geometry}
+#+LATEX_HEADER_EXTRA:   \setlength{\parindent}{0pt}
+#+LATEX_HEADER_EXTRA:   \setlength{\parskip}{0.5em}
 
 This manual is a reference guide for Liaison {{{version}}}, first
 released on {{{release-date}}}.

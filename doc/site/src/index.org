@@ -1,15 +1,20 @@
 #+TITLE: Liaison
 
-Liaison generalizes and automates the process of linking an /HTML/
+Liaison generalizes and automates the process of mapping an /HTML/
 document to its corresponding source document originally written in
 the /Org/ markup language --- its purpose is to generate URLs that
 point to a specific page in a Git web interface, e.g. the tree, blob,
 blame, edit pages and more.
 
-You should see the provided [[file:examples/cheese.org][example]] that showcases a very simple
-implementation to demonstrate the usefulness of this package. You will
-also find documentation -- to guide you as you navigate this rather
-abstract library -- that's available in a number of formats:
+Liaison [[https://grtcdr.tn/posts/2022-10-08.html][began as a small endeavor]] to provide complete transparency
+about the history of documents without hindering the reading
+experience, one of its main goals is to support a wide array of forges
+and to integrate seamlessly with the =ox-publish.el= library.
+
+Here's an [[file:examples/cheese.org][example]] that showcases a very simple implementation to
+demonstrate the usefulness of this package.
+
+Documentation is available in a number of formats:
 - [[file:manual.org][HTML]]
 - [[file:manual.pdf][PDF]]
 - Info -- which you can find in the source tree (under the =doc= directory)
