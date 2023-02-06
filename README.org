@@ -25,10 +25,12 @@ Anyone with a blog or documentation website built on top of the
 * What web interfaces does it support?
 
 - GitHub
-- GitLab[fn:1]
-- SourceHut[fn:1]
-- Gitea[fn:1]
-- cgit[fn:1]
+- GitLab
+- SourceHut
+- Gitea
+- cgit
+
+When applicable, custom instances are supported too.
 
 * Who's using it?
 
@@ -37,7 +39,3 @@ Anyone with a blog or documentation website built on top of the
 
 If you are using Liaison in your project and would like to be included
 in the list, feel free to [[mailto:tahaaziz.benali@esprit.tn][contact me]].
-
-* Footnotes
-
-[fn:1] Custom instances are supported as well.
