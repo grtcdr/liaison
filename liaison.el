@@ -151,21 +151,21 @@ GitHub. TYPE can be one of ’log’, ’edit’, ’blob’, ’plain’,
 custom instance. TYPE can be any one of ’log’, ’tree’, ’blob’ or
 ’blame’ or ’plain’."
   (unless (not (member type '(log tree blob blame plain)))
-    (let* ((?d (concat "https://" (liaison--assoc-forge remote)))
-	   (?s (if (string-prefix-p "git@" remote)
+    (let* ((forge (concat "https://" (liaison--assoc-forge remote)))
+	   (slug (if (string-prefix-p "git@" remote)
 		   (string-trim (car (cdr (split-string remote ":"))) nil ".git")
 		 (string-trim remote
 			      (concat "https://" (liaison--assoc-forge remote) "/")
 			      ".git")))
-	   (?t (cond ((eq type 'log) "commits")
+	   (type (cond ((eq type 'log) "commits")
 		     ((eq type 'tree) "blob")
 		     ((eq type 'blob) "raw")
 		     ((eq type 'blame) "blame")
 		     ((eq type 'plain) "blob")))
 	   (plain-query-string (unless (not (eq type 'plain))
 				 "?plain=1"))
-	   (?b (liaison--get-branch))
-	   (?r (liaison--get-resource-slug (buffer-file-name))))
+	   (branch (liaison--get-branch))
+	   (resource (liaison--get-resource-slug (buffer-file-name))))
       (concat
        (mapconcat 'identity (remove "" (list forge slug "-" type branch resource)) "/")
        plain-query-string))))
