@@ -256,13 +256,13 @@ This causes severe problems to the generation of URLs. Instead of
 receiving a working URL such as the following:
 
 #+begin_example
-https://github.com/grtcdr/forgecast/commits/main/liaison.el
+https://github.com/grtcdr/liaison/commits/main/liaison.el
 #+end_example
 
 You'll instead receive a URL like this:
 
 #+begin_example
-https://github.com/grtcdr/forgecast/commits/(HEAD detached at 984d79d)/liaison.el
+https://github.com/grtcdr/liaison/commits/(HEAD detached at 984d79d)/liaison.el
 #+end_example
 
 This URL is not understood by GitHub, or any other web interface for
