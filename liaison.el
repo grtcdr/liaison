@@ -39,9 +39,6 @@
   "Alist of forges and their corresponding function which is used to
 build their resource URLs.")
 
-(defvar liaison-fontify-log nil
-  "Whether to fontify the log returned by ‘liaison-log’.")
-
 (defun liaison--forge-function (forge)
   "Return the function associated with a given FORGE."
   (alist-get forge liaison-forge-alist nil nil #'string=))
