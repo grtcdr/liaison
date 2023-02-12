@@ -33,8 +33,6 @@
 (require 'op-package)
 (require 'project)
 
-(op-package-install '(htmlize))
-
 ;; Temporarily change the default directory because this website is
 ;; nested within the library - it's either this or a symlink.
 (let ((default-directory (project-root (project-current))))
@@ -52,12 +50,12 @@
 ;; Redefinition of a built-in function
 (defun org-html-format-spec (info)
   "Return a list of format strings representing the format specification."
-  (list (cons ?e (liaison-get-resource-url 'edit))
-	(cons ?m (liaison-get-resource-url 'blame))
-	(cons ?b (liaison-get-resource-url 'blob))    
-	(cons ?t (liaison-get-resource-url 'tree))
-	(cons ?l (liaison-get-resource-url 'log))
-	(cons ?p (liaison-get-resource-url 'plain))))
+  `((?e . ,(liaison-get-resource-url 'edit))
+    (?m . ,(liaison-get-resource-url 'blame))
+    (?b . ,(liaison-get-resource-url 'blob))
+    (?t . ,(liaison-get-resource-url 'tree))
+    (?l . ,(liaison-get-resource-url 'log))
+    (?p . ,(liaison-get-resource-url 'plain))))
 
 ;; Metadata which appears in the manual
 (setq user-full-name "Aziz Ben Ali"
