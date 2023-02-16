@@ -22,7 +22,7 @@
 
 ;;; Commentary:
 
-;; op-template.el provides the XML templates of https://grtcdr.tn/darkman.el.
+;; op-template.el provides HTML templates for https://grtcdr.tn/darkman.el.
 
 ;;; Code:
 
@@ -31,13 +31,13 @@
 (defalias 'sexp->xml #'shr-dom-to-xml)
 
 (defun op-template-stylesheet (href)
-  "Format a stylesheet with location HREF."
+  "Format a stylesheet with attribute HREF."
   (sexp->xml
    `(link ((rel . "stylesheet")
 	   (href . ,href)))))
 
 (defun op-template-main-navbar (_)
-  "Return the template shared among publishing projects."
+  "HTML template shared among publishing projects."
   (sexp->xml
    '(nav nil
 	 (ul nil
@@ -55,7 +55,7 @@
 		    "Development"))))))
 
 (defun op-template-meta-links (_)
-  "Return the template used by the examples publishing project."
+  "HTML template used by the examples publishing project."
   (sexp->xml
    '(div ((class . "meta"))
 	 (ul nil

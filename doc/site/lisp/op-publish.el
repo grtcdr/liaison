@@ -40,16 +40,9 @@
   (add-to-list 'load-path default-directory)
   (require 'liaison))
 
-(defun op-publish-publish-manual (plist filename pub-dir)
-  "Publishing function used to publish the manual."
-  (org-html-publish-to-html plist filename pub-dir)
-  (if (string= (getenv "CI") "true")
-      (org-latex-publish-to-latex plist filename pub-dir)
-    (org-latex-publish-to-pdf plist filename pub-dir)))
-
 ;; Redefinition of a built-in function
 (defun org-html-format-spec (info)
-  "Return a list of format strings representing the format specification."
+  "Return format specification for preamble and postamble."
   `((?e . ,(liaison-get-resource-url 'edit))
     (?m . ,(liaison-get-resource-url 'blame))
     (?b . ,(liaison-get-resource-url 'blob))
@@ -57,27 +50,39 @@
     (?l . ,(liaison-get-resource-url 'log))
     (?p . ,(liaison-get-resource-url 'plain))))
 
-;; Metadata which appears in the manual
-(setq user-full-name "Aziz Ben Ali"
-      user-mail-address "tahaaziz.benali@esprit.tn")
+(defun op-publish-manual-publisher (plist filename pub-dir)
+  "Publish the manual to multiple formats."
+  (org-html-publish-to-html plist filename pub-dir)
+  (if (string= (getenv "CI") "true")
+      (org-latex-publish-to-latex plist filename pub-dir)
+    (org-latex-publish-to-pdf plist filename pub-dir)))
 
-;; You don't necessarily have to set these variables
-(setq org-publish-timestamp-directory ".cache/"
+;; Metadata which appears in the manual
+(setq user-full-name "Aziz Ben Ali")
+
+;; This is where the project cache is stored
+(setq org-publish-timestamp-directory ".cache/")
+
+;; Define how source code is exported
+(setq org-src-fontify-natively t
       org-src-preserve-indentation t)
 
+;; Global settings for LaTeX exports
+(setq org-latex-src-block-backend 'engraved)
+
 ;; Global settings for HTML exports
-(setq org-html-preamble nil
+(setq org-html-doctype "html5"
+      org-html-preamble nil
       org-html-postamble nil
-      org-html-doctype "html5"
-      org-html-htmlize-output-type 'css
       org-html-head-include-default-style nil
       org-html-head-include-scripts nil
+      org-html-htmlize-output-type 'css
       org-html-htmlize-output-type 'css)
 
 ;; Project specification
 (setq org-publish-project-alist
       (list
-       (list "root" ;; Specify how files at the root of the site is published
+       (list "root" ;; Specify how files at the root of the site are published
 	     :base-extension "org"
 	     :base-directory "src"
 	     :publishing-directory "public"
@@ -100,7 +105,7 @@
 	     :base-extension "org"
 	     :base-directory "src"
 	     :publishing-directory "public"
-	     :publishing-function 'op-publish-publish-manual
+	     :publishing-function 'op-publish-manual-publisher
 	     :exclude ".*"
 	     :include '("manual.org")
 	     :html-toplevel-hlevel 2
