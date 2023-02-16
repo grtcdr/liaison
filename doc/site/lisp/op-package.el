@@ -44,7 +44,7 @@
     (unless (package-installed-p pkg)
       (package-install pkg))))
 
-(op-package-install '(htmlize engrave-faces))
+(op-package-install '(htmlize engrave-faces yaml-mode))
 
 (provide 'op-package)
 ;; op-package.el ends here
