@@ -61,7 +61,7 @@ It is best that you initiate the publishing process using a
 In your publishing script, add the package to the =load-path= and then
 require it like so:
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (add-to-list 'load-path "liaison")
 (require 'liaison)
 #+end_src
@@ -223,7 +223,7 @@ To get around this, you should use set the =:sitemap-function=
 option. Here's an example in which we hide the postamble from
 appearing in the sitemap:
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (defun my/blog-sitemap-function (title list)
   "Custom site map function for the blog project."
   (concat "#+OPTIONS: html-postamble:nil\n"
@@ -232,7 +232,7 @@ appearing in the sitemap:
 
 Here's another example which references a setupfile:
 
-#+begin_src elisp
+#+begin_src emacs-lisp
 (defun my/blog-sitemap-function (title list)
   "Custom site map function for the blog project."
   (concat "#+SETUPFILE: setup.org\n"
