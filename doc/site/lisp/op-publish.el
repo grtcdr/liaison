@@ -112,7 +112,6 @@
 	     :html-head (op-template-metadata)
 	     :html-preamble 'op-template-main-navbar
 	     :filename "manual"
-	     :with-email t
 	     :with-author t)
        (list "stylesheets" ;; Specify how stylesheets are published
 	     :base-extension "css"
