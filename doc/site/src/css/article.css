@@ -2,30 +2,30 @@
   margin-top: 2em;
 }
 
-.meta > ul {
+.links > ul {
   list-style-type: none;
   text-align: center;
   padding: 0;
 }
 
-.meta > ul li {
+.links > ul li {
   display: inline-block;
   user-select: none;
   font-weight: 300;
   text-transform: uppercase;
 }
 
-.meta > ul li+li:before {
+.links > ul li+li:before {
   content: '|';
   color: var(--bg02);
   padding: 0 1.1em;
 }
 
-.meta ul li > a {
+.links ul li > a {
   text-decoration: none;
   color: var(--blue);
 }
 
-.meta ul li > a:hover {
+.links ul li > a:hover {
   background-color: var(--bg02);
 }

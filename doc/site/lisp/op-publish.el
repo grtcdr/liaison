@@ -63,12 +63,10 @@
 ;; This is where the project cache is stored
 (setq org-publish-timestamp-directory ".cache/")
 
-;; Define how source code is exported
+;; Configure how source code is processed
 (setq org-src-fontify-natively t
-      org-src-preserve-indentation t)
-
-;; Global settings for LaTeX exports
-(setq org-latex-src-block-backend 'engraved)
+      org-src-preserve-indentation t
+      org-latex-src-block-backend 'engraved)
 
 ;; Global settings for HTML exports
 (setq org-html-doctype "html5"
@@ -89,18 +87,18 @@
 	     :publishing-function 'org-html-publish-to-html
 	     :with-toc nil
 	     :section-numbers nil
-	     :html-head (op-template-metadata)
-	     :html-preamble 'op-template-main-navbar)
+	     :html-head op-template-metadata
+	     :html-preamble op-template-main-navbar)
        (list "examples" ;; Specify how articles are published
 	     :base-extension "org"
 	     :base-directory "src/examples"
 	     :publishing-directory "public/examples"
 	     :publishing-function 'org-html-publish-to-html
 	     :html-head
-	     (concat (op-template-metadata)
+	     (concat op-template-metadata
 		     (op-template-stylesheet "/liaison/css/article.css"))
-	     :html-preamble 'op-template-main-navbar
-	     :html-postamble 'op-template-meta-links)
+	     :html-preamble op-template-main-navbar
+	     :html-postamble op-template-links)
        (list "manual" ;; Specify how the manual is published
 	     :base-extension "org"
 	     :base-directory "src"
@@ -109,8 +107,8 @@
 	     :exclude ".*"
 	     :include '("manual.org")
 	     :html-toplevel-hlevel 2
-	     :html-head (op-template-metadata)
-	     :html-preamble 'op-template-main-navbar
+	     :html-head op-template-metadata
+	     :html-preamble op-template-main-navbar
 	     :filename "manual"
 	     :with-author t)
        (list "stylesheets" ;; Specify how stylesheets are published

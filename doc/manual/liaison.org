@@ -66,6 +66,10 @@ require it like so:
 (require 'liaison)
 #+end_src
 
+If you’re interested in a more elaborate but less tedious method for
+installing this package, you should read my article on [[https://grtcdr.tn/posts/2023-02-07.html][Implementing
+per-project package management for ox-publish.el projects]].
+
 * Integration
 
 This section outlines the different steps needed to integrate this

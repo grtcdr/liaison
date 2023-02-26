@@ -22,7 +22,7 @@
 
 ;;; Commentary:
 
-;; op-template.el provides HTML templates for https://grtcdr.tn/darkman.el.
+;; op-template.el provides HTML templates for https://grtcdr.tn/liaison.
 
 ;;; Code:
 
@@ -36,8 +36,7 @@
    `(link ((rel . "stylesheet")
 	   (href . ,href)))))
 
-(defun op-template-main-navbar (_)
-  "HTML template shared among publishing projects."
+(defvar op-template-main-navbar
   (sexp->xml
    '(nav nil
 	 (ul nil
@@ -52,12 +51,12 @@
 		    "To-dos"))
 	     (li nil
 		 (a ((href . "https://github.com/grtcdr/liaison"))
-		    "Development"))))))
+		    "Development")))))
+  "HTML template shared among publishing projects.")
 
-(defun op-template-meta-links (_)
-  "HTML template used by the examples publishing project."
+(defvar op-template-links
   (sexp->xml
-   '(div ((class . "meta"))
+   '(div ((class . "links"))
 	 (ul nil
 	     (li nil
 		 (a ((href . "%e"))
@@ -76,16 +75,17 @@
 		    "Log"))
 	     (li nil
 		 (a ((href . "%p"))
-		    "Plain"))))))
+		    "Plain")))))
+  "HTML template used by the examples publishing project.")
 
-(defun op-template-metadata ()
-  "Return the metadata shared among publishing projects."
+(defvar op-template-metadata
   (concat
    (op-template-stylesheet "https://grtcdr.tn/css/common.css")
    (sexp->xml
     '(link ((rel . "icon")
 	    (type . "image/x-icon")
-	    (href . "https://grtcdr.tn/assets/favicon.ico"))))))
+	    (href . "https://grtcdr.tn/assets/favicon.ico")))))
+  "Metadata shared among publishing projects.")
 
 (provide 'op-template)
 ;; op-template.el ends here
