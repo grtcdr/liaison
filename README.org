@@ -39,3 +39,17 @@ When applicable, custom instances are supported too.
 
 If you are using Liaison in your project and would like to be included
 in the list, feel free to [[mailto:tahaaziz.benali@esprit.tn][contact me]].
+
+* Citing
+
+If your research involves this project in any way, you may cite it
+like so:
+
+#+begin_src bibtex
+@misc{ab22liaison,
+  author = {Aziz Ben Ali},
+   title = {Generic Git URIs for Org Mode},
+     url = {https://grtcdr.tn/liaison/},
+    year = 2022
+}
+#+end_src
