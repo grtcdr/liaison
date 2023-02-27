@@ -1,4 +1,4 @@
-;;; liaison.el --- Link your content to its source. -*- lexical-binding: t; -*-
+;;; liaison.el --- Generic Git URIs for Org Mode -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2022 Aziz Ben Ali
 
