@@ -1,10 +1,12 @@
 #+TITLE: Liaison
+#+OPTIONS: toc:nil
 
-Liaison generalizes and automates the process of linking an /HTML/
-document to its corresponding source document originally written in
-the /Org/ markup language. Its purpose is to generate URLs that point
-to a specific page in a Git web interface, e.g. the tree, blob, blame,
-edit pages, and more.
+Liaison, [[https://git.sr.ht/~grtcdr/liaison][which has recently migrated to SourceHut]], generalizes and
+automates the process of linking an /HTML/ document to its
+corresponding source document originally written in the /Org/ markup
+language. Its purpose is to generate URLs that point to a specific
+page in a Git web interface, e.g. the tree, blob, blame, edit pages,
+and more.
 
 For more information on how to install and integrate the package in
 your project, you are encouraged to read the [[https://grtcdr.tn/liaison/manual.html][online manual]].
